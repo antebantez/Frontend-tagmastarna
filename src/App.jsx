@@ -1,10 +1,11 @@
-import React from "react";
+import React from "react"
 import { useState } from 'react'
 import HomePage from './pages/HomePage';
 import SearchJourney from './pages/SearchJourney'
 import SelectSeats from './pages/SelectSeats'
 import TicketPage from './pages/TicketPage'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import '../scss/App.scss';
 
 
 
