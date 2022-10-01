@@ -1,8 +1,28 @@
 import React from 'react'
 
-const SelectSeats = () => {
+const SelectSeats = ({ trainData, journeyData }) => {
+
+  console.log(journeyData);
+  console.log(trainData);
+
   return (
-    <div>SelectSeats</div>
+    <>
+      <div>
+        <div>SelectSeats</div>
+        <div>Från : {journeyData.startStation}</div>
+        <div>Till: {journeyData.endDestination}</div>
+        <div>Avgångstid : {journeyData.depFromFirstStationTime} + {journeyData.startStationDeparture} minuter</div>
+        <div>Lediga platser : { }</div>
+      </div>
+      <div>
+        Haer mountar vi komponent som renderar ut tåget och dess saeten
+        {
+          trainData.map((seat, id) => {
+            return <div key={id}>{seat.seatId}</div>
+          })
+        }
+      </div>
+    </>
   )
 }
 
