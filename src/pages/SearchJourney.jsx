@@ -1,25 +1,16 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchJourneyForm from '../components/SearchJourneyForm';
 import Journeys from '../components/Journeys';
+import buildQuery from '../utilities/utilities';
 
 const SearchJourney = () => {
 
   const [journeys, setJourneys] = useState(null);
-  const [stations, setStations] = useState([]);
-
-  const buildQuery = (values) => {
-    const mappedValues = Object.keys(values).map((key) => {
-      if (values[key]) {
-        return `${key}=${values[key]}`;
-      }
-    });
-
-    return mappedValues[0] ? `?${mappedValues.join('&')}` : '';
-  }
 
   const handleSearch = async (searchValues) => {
     const query = buildQuery(searchValues);
+    console.log(query);
     if (query) {
       try {
         const searchResponse = await fetch(`/api/searchJourney/${query}`);
@@ -31,21 +22,8 @@ const SearchJourney = () => {
     }
   }
 
-  // useEffect(() => {
-  //   const getStations = async () => {
-  //     const response = await fetch('...');
-  //     const json = await response.json();
-
-  //     setStations(json.data);
-  //   }
-
-  //   getStations();
-  // }, []);
-
   return (
     <>
-
-      <div>SearchJourney</div>
 
       {journeys ? <Journeys journeyData={journeys} /> : <SearchJourneyForm handleSearch={handleSearch} />}
 

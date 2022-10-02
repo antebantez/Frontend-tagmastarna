@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SelectSeats from '../pages/SelectSeats';
+import buildQuery from '../utilities/utilities';
 
 const Journeys = ({ journeyData }) => {
 
@@ -7,9 +8,10 @@ const Journeys = ({ journeyData }) => {
   let [selectedJourney, setSelectedJourney] = useState(null);
 
   const handleBooking = async (journeyId, journeyInfo, journey) => {
+    const query = buildQuery(journeyInfo)
     try {
       const handleBookingResponse = await fetch(
-        `/api/selectSeats/seats/${journeyId}?departure=${journeyInfo.departure}&arrival=${journeyInfo.arrival}`
+        `/api/selectSeats/seats/${journeyId}${query}`
       );
       const json = await handleBookingResponse.json();
       setTrainData(json.data);
@@ -22,7 +24,7 @@ const Journeys = ({ journeyData }) => {
 
   return (
     <>
-      <h2>Resor</h2>
+      <h2>Välj resa</h2>
       {
         trainData ? <SelectSeats trainData={trainData} journeyData={selectedJourney} /> :
           journeyData && journeyData.map((journey, id) => {
@@ -36,8 +38,8 @@ const Journeys = ({ journeyData }) => {
                   handleBooking(
                     journey.journeyId,
                     {
-                      startStationId: journey.startStationId,
-                      endStationId: journey.endStationId,
+                      //startStationId: journey.startStationId,
+                      //endStationId: journey.endStationId,
                       departure: journey.startStationDeparture,
                       arrival: journey.endStationArrival
                     },

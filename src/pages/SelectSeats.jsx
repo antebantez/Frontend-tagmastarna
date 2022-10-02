@@ -7,8 +7,8 @@ const SelectSeats = ({ trainData, journeyData }) => {
 
   return (
     <>
+      <h3>Anpassa resa</h3>
       <div>
-        <div>SelectSeats</div>
         <div>Från : {journeyData.startStation}</div>
         <div>Till: {journeyData.endDestination}</div>
         <div>Avgångstid : {journeyData.depFromFirstStationTime} + {journeyData.startStationDeparture} minuter</div>

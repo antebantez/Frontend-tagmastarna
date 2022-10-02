@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const SearchJourneyForm = ({ handleSearch }) => {
   const [startStation, setStartStationInput] = useState('');
   const [endStation, setEndStationInput] = useState('');
   const [date, setDateInput] = useState('');
+  const [numOfTravelers, setNumOfTravelers] = useState(1);
+  const [stations, setStations] = useState([]);
 
   const submitForm = (event) => {
     event.preventDefault();
-    handleSearch({ startStation, endStation, date });
+    handleSearch({ startStation, endStation, date, numOfTravelers });
+  }
+
+  // to be used for autosuggesting stations
+  useEffect(() => {
+    const getStations = async () => {
+      const response = await fetch('/api/searchJourney/stations');
+      const json = await response.json();
+
+      setStations(json.data);
+    }
+
+    getStations();
+  }, []);
+
+  const handleNumOfTravelersClick = (valueChange) => {
+    setNumOfTravelers((previousValue) => previousValue + valueChange);
   }
 
   return (
@@ -16,7 +35,7 @@ const SearchJourneyForm = ({ handleSearch }) => {
 
       <h2>Sök resa</h2>
 
-      <Form onSubmit={submitForm} autoComplete='off'>
+      <Form onSubmit={submitForm} autoComplete='on'>
         <Form.Control
           type='text'
           name='startStation'
@@ -37,12 +56,17 @@ const SearchJourneyForm = ({ handleSearch }) => {
           type='date'
           name='date'
           value={date}
-          placeholder='Datum'
           onChange={(event) => setDateInput(event.target.value)}
         />
 
-        <button onClick={submitForm}>Sök</button>
+        <p>Antal resande</p>
+        <Button onClick={() => handleNumOfTravelersClick(1)}>+</Button>
+        <div>{numOfTravelers}</div>
+        <Button onClick={() => handleNumOfTravelersClick(-1)}>-</Button>
+
+        <Button type='submit' onClick={submitForm}>Sök</Button>
       </Form>
+
     </div>
   )
 }
