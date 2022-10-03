@@ -1,12 +1,13 @@
-#hpDiv{
-  background-image: url('../public//Assets/Sunset-Wallpaper-For-Phone-HD.jpg');
-  height: 89vh;
+#hpDiv {
+  background-image: url("../public//Assets/Jada.jpeg");
+  height: 98vh;
   background-size: cover;
   padding-top: 30vh;
+  background-position: center;
 }
 
-#testKnapp{
-  border-radius: 50px;
+#testKnapp {
+  border-radius: 25px;
   width: 60vw;
   height: 10vh;
   padding-left: 20px;
@@ -14,4 +15,5 @@
   font-size: larger;
   font-weight: bolder;
   background: rgb(199, 132, 7);
+  opacity: 80%;
 }
