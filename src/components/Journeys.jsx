@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SelectSeats from '../pages/SelectSeats';
 import buildQuery from '../utilities/utilities';
+import Button from 'react-bootstrap/Button';
 
 const Journeys = ({ journeyData }) => {
 
@@ -31,9 +32,11 @@ const Journeys = ({ journeyData }) => {
             return <div key={id}>
               <div>Från: {journey.startStation}</div>
               <div>Till: {journey.endDestination}</div>
-              <div>Avgångstid: {journey.depFromFirstStationTime}</div>
+              <div>
+                Avgångstid: {journey.depFromFirstStationTime.split('T')[0]} {journey.depFromFirstStationTime.split('T')[1].slice(0, 5)}
+              </div>
               <div>Beräknad restid: {journey.endStationArrival - journey.startStationDeparture} minuter</div>
-              <button
+              <Button
                 onClick={() => {
                   handleBooking(
                     journey.journeyId,
@@ -48,7 +51,7 @@ const Journeys = ({ journeyData }) => {
                 }}
               >
                 Boka biljett
-              </button>
+              </Button>
             </div>
           })
       }

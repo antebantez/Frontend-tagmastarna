@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SearchJourneyForm from '../components/SearchJourneyForm';
 import Journeys from '../components/Journeys';
 import buildQuery from '../utilities/utilities';
@@ -10,7 +10,6 @@ const SearchJourney = () => {
 
   const handleSearch = async (searchValues) => {
     const query = buildQuery(searchValues);
-    console.log(query);
     if (query) {
       try {
         const searchResponse = await fetch(`/api/searchJourney/${query}`);
@@ -24,9 +23,16 @@ const SearchJourney = () => {
 
   return (
     <>
-
-      {journeys ? <Journeys journeyData={journeys} /> : <SearchJourneyForm handleSearch={handleSearch} />}
-
+      {
+        journeys ? <Journeys journeyData={journeys} /> :
+          <SearchJourneyForm handleSearch={handleSearch} />
+      }
+      {
+        //<SearchJourneyForm handleSearch={handleSearch} />
+      }
+      {
+        //journeys && <Journeys journeyData={journeys} />
+      }
     </>
   );
 }

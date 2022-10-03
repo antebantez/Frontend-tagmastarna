@@ -6,12 +6,11 @@ const SearchJourneyForm = ({ handleSearch }) => {
   const [startStation, setStartStationInput] = useState('');
   const [endStation, setEndStationInput] = useState('');
   const [date, setDateInput] = useState('');
-  const [numOfTravelers, setNumOfTravelers] = useState(1);
   const [stations, setStations] = useState([]);
 
   const submitForm = (event) => {
     event.preventDefault();
-    handleSearch({ startStation, endStation, date, numOfTravelers });
+    handleSearch({ startStation, endStation, date });
   }
 
   // to be used for autosuggesting stations
@@ -25,10 +24,6 @@ const SearchJourneyForm = ({ handleSearch }) => {
 
     getStations();
   }, []);
-
-  const handleNumOfTravelersClick = (valueChange) => {
-    setNumOfTravelers((previousValue) => previousValue + valueChange);
-  }
 
   return (
     <div className="form-wrapper">
@@ -58,11 +53,6 @@ const SearchJourneyForm = ({ handleSearch }) => {
           value={date}
           onChange={(event) => setDateInput(event.target.value)}
         />
-
-        <p>Antal resande</p>
-        <Button onClick={() => handleNumOfTravelersClick(1)}>+</Button>
-        <div>{numOfTravelers}</div>
-        <Button onClick={() => handleNumOfTravelersClick(-1)}>-</Button>
 
         <Button type='submit' onClick={submitForm}>Sök</Button>
       </Form>
