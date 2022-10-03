@@ -1,50 +1,63 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
-import Seat from '../components/Seat';
+import Booking from './Booking';
+import { Link } from 'react-router-dom';
+import Ticket from '../classes/Ticket';
 
-const SelectSeats = ({ trainData, journeyData }) => {
-  const [numOfTravelers, setNumOfTravelers] = useState(1);
+const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
-
-  console.log(journeyData);
-  console.log(trainData);
-
-  const handleNumOfTravelersClick = (valueChange) => {
-    setNumOfTravelers((previousValue) => previousValue + valueChange);
-    seatsToSelect((previousValue) => previousValue + valueChange);
-  }
+  const [seatsToSelect, setSeatsToSelect] = useState(numOfSeats);
 
   const handleSelectSeat = (seat) => {
-    console.log(seat);
+    setSelectedSeats([...selectedSeats, seat]);
+    ticket.addSeatReservation(
+      seat.journeyId, seat.carriageId, seat.seatId, seat.seatNumber
+    );
+    setSeatsToSelect((previousValue) => previousValue - 1);
   }
 
   return (
     <>
-      <h3>Anpassa resa</h3>
+      <h3>Välj säten</h3>
       <div>
-        <div>Från : {journeyData.startStation}</div>
-        <div>Till: {journeyData.endDestination}</div>
-        <div>
-          Avgångstid: {journeyData.depFromFirstStationTime} + {journeyData.startStationDeparture} minuter
-        </div>
-        <div>Lediga platser: {trainData.numOfFreeSeats}</div>
-
-        <p>Antal resande: </p>
-        <Button onClick={() => handleNumOfTravelersClick(1)}>+</Button>
-        <div>{numOfTravelers}</div>
-        <Button onClick={() => handleNumOfTravelersClick(-1)}>-</Button>
-
+        Mina val:
+        {
+          selectedSeats > 0 && selectedSeats.map((seat, id) => {
+            return (
+              <div key={id}>
+                <div>Plats: {seat.seatNumber}</div>
+                <div>Vagn: {seat.carriageId}</div>
+              </div>
+            )
+          })
+        }
       </div>
       <div>
-        Haer mountar vi komponent som renderar ut tåget och dess saeten
         {
-          trainData.seats.map((seat, id) => {
+          seatsToSelect === 0 &&
+          < Link to={'/booking'} state={{ ticket: ticket }} >
+            <Button>Bekräfta</Button>
+          </Link>
+        }
+        {
+          seatData.seats.map((seat, id) => {
             return (
               <div
                 key={id}
                 onClick={() => handleSelectSeat(seat)}
+                style={
+                  {
+                    color: 'white',
+                    backgroundColor: 'green',
+                    padding: '10px',
+                    margin: '10px',
+                    maxWidth: '300px',
+                    justifyContent: 'center'
+
+                  }
+                }
               >
-                seatId: {seat.seatId} seatNumber: {seat.seatNumber}
+                seatId: {seat.seatId} seatNumber: {seat.seatNumber} carriageId: {seat.carriageId}
               </div>
             )
           })
@@ -54,4 +67,4 @@ const SelectSeats = ({ trainData, journeyData }) => {
   )
 }
 
-export default SelectSeats
+export default SelectSeats;
