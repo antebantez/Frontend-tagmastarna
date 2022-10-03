@@ -1,11 +1,13 @@
-import React from 'react'
-import { useState } from 'react';
-import SearchJourneyForm from '../components/SearchJourneyForm';
-import Journeys from '../components/Journeys';
-import buildQuery from '../utilities/utilities';
+import React from "react";
+import { useState } from "react";
+import SearchJourneyForm from "../components/SearchJourneyForm";
+import Journeys from "../components/Journeys";
+import buildQuery from "../utilities/utilities";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { Row, Col } from "react-bootstrap";
 
 const SearchJourney = () => {
-
   const [journeys, setJourneys] = useState(null);
 
   const handleSearch = async (searchValues) => {
@@ -19,22 +21,30 @@ const SearchJourney = () => {
         console.log(error);
       }
     }
-  }
+  };
 
   return (
     <>
-      {
-        journeys ? <Journeys journeyData={journeys} /> :
+      <Row>
+        <Header />
+      </Row>
+      <Row>
+        {journeys ? (
+          <Journeys journeyData={journeys} />
+        ) : (
           <SearchJourneyForm handleSearch={handleSearch} />
-      }
-      {
-        //<SearchJourneyForm handleSearch={handleSearch} />
-      }
-      {
-        //journeys && <Journeys journeyData={journeys} />
-      }
+        )}
+        {
+          //<SearchJourneyForm handleSearch={handleSearch} />
+        }
+        {
+          //journeys && <Journeys journeyData={journeys} />
+        }
+      </Row>
+
+      <Footer />
     </>
   );
-}
+};
 
 export default SearchJourney;
