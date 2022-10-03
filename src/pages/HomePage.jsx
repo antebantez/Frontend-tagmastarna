@@ -1,15 +1,22 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Header from '../components/Header'
+import Footer from '../components/Footer';
+import SearchJourney from '../components/SearchJourneyButton';
+
+
 //import '../../scss/HomePage.scss'
 
 const HomePage = () => {
+
+  
+
   return (
-    <>
-    <div id='boldertext' className='bg-danger p-5 text-center'><h1>Tågmästarna</h1></div>
-      <div className='justify-content-center text-center mt-5'>
-        <Button id='searchResa' className='mt-5 ms-3 p-5' variant='primary'>Hej</Button>
-      </div>
-      </>
+    <Container>
+      <Header/>
+      <SearchJourney/>
+      <Footer/>
+      </Container>
   )
 }
 
