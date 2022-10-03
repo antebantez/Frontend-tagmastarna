@@ -1,10 +1,15 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Header from '../components/Header'
+import Footer from '../components/Footer';
+import SearchJourney from '../components/SearchJourneyButton';
+
+
 //import '../../scss/HomePage.scss'
 
 const HomePage = () => {
 
+<<<<<<< HEAD
   //const [routes, setRoutes] = useState([]);
 
   /* useEffect(() => {
@@ -37,6 +42,16 @@ const HomePage = () => {
         <Button id='searchResa' className='mt-5 ms-3 p-5' variant='primary'>Hej</Button>
       </div>
     </>
+=======
+
+
+  return (
+    <Container>
+      <Header/>
+      <SearchJourney/>
+      <Footer/>
+      </Container>
+>>>>>>> master
   )
 }
 
