@@ -2,8 +2,8 @@
   background-image: url("../public//Assets/Jada.jpeg");
   height: 98vh;
   background-size: cover;
-  padding-top: 30vh;
   background-position: center;
+  background-repeat: none;
 }
 
 #testKnapp {
@@ -15,5 +15,4 @@
   font-size: larger;
   font-weight: bolder;
   background: rgb(199, 132, 7);
-  opacity: 80%;
 }

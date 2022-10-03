@@ -11,8 +11,7 @@ const SearchJourney = () => {
         <Col className="">
           <Link to="/SearchJourney">
             <Button id="testKnapp" className="border-0 mt-5">
-              {" "}
-              Sök resa
+              <h2 id="Search-text">Sök resa</h2>
             </Button>
           </Link>
         </Col>
