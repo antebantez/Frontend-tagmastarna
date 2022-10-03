@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom';
 const SearchJourney = () => {
   return (
     <Row>
-        <div id='hpDiv' className='text-center' >
-          
+      <div id='hpDiv' className='text-center' >
+
         <Col className=''>
-          <Link to="/ticketPage"><Button id='testKnapp' className='border border-2 border-dark mt-5'> Sök resa</Button></Link>
-          
-          </Col>
-          </div>
-        </Row>
+          <Link to="/searchJourney"><Button id='testKnapp' className='border border-2 border-dark mt-5'> Sök resa</Button></Link>
+
+        </Col>
+      </div>
+    </Row>
   )
 }
 
