@@ -3,23 +3,10 @@ class Ticket {
     seats = [];
     travelers = [];
     firstClass = false;
+    cancellationProtection = false;
 
-    constructor(
-        data
-        //arrivalDatetime, departureDatetime,
-        //startStationId, startStation, startStationDeparture,
-        //endStationId, endDestination, endStationArrival
-    ) {
-        console.log(data);
+    constructor(data) {
         Object.assign(this, data);
-        /* this.arrivalDatetime = arrivalDatetime;
-        this.departureDatetime = departureDatetime;
-        this.startStationId = startStationId;
-        this.startStation = startStation;
-        this.startStationDeparture = startStationDeparture;
-        this.endStationId = endStationId;
-        this.endDestination = endDestination;
-        this.endStationArrival = endStationArrival */
     }
 
     addSeatReservation(journeyId, carriageId, seatId, seatNumber) {
@@ -35,6 +22,11 @@ class Ticket {
                 }
             );
         }
+    }
+
+    addTraveler(travelerDataObject) {
+        console.log(travelerDataObject);
+        this.travelers.push(travelerDataObject);
     }
 
     getTravelers() {
@@ -53,6 +45,18 @@ class Ticket {
         // call static methods of Price class to calculate prices 
     }
 
+    getBookingData() {
+        return {
+            customerId: 2,
+            journeyId: this.journeyId,
+            cancellationProtection: this.cancellationProtection,
+            departureTime: '2022-10-05 09:23:00',
+            startStationId: this.startStationId,
+            endStationId: this.endStationId,
+            travelers: this.travelers
+        }
+    }
+
     getTicketRenderInfo() {
         let ticketInfo = [
             {
@@ -65,7 +69,7 @@ class Ticket {
             },
             {
                 description: 'Avgångstid: ',
-                value: `${this.depFromFirstStation} + ${this.startStationDeparture}`
+                value: `${this.depFromFirstStationTime} + ${this.startStationDeparture}`
             },
             {
                 description: 'Beräknad restid: ',
