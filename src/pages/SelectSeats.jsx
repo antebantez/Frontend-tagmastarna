@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Seat from '../components/Seat';
+import Card from 'react-bootstrap/Card'
+import { Col, Row} from 'react-bootstrap'
 
 const SelectSeats = ({ trainData, journeyData }) => {
   const [numOfTravelers, setNumOfTravelers] = useState(1);
@@ -20,35 +22,43 @@ const SelectSeats = ({ trainData, journeyData }) => {
 
   return (
     <>
+      <Card className='p-3'>
       <h3>Anpassa resa</h3>
-      <div>
+      <Card.Subtitle>
         <div>Från : {journeyData.startStation}</div>
         <div>Till: {journeyData.endDestination}</div>
         <div>
-          Avgångstid: {journeyData.depFromFirstStationTime} + {journeyData.startStationDeparture} minuter
+          Avgångstid: {journeyData.depFromFirstStationTime.slice(0,19).split('T').join(' ')} + {journeyData.startStationDeparture} minuter
         </div>
         <div>Lediga platser: {trainData.numOfFreeSeats}</div>
 
-        <p>Antal resande: </p>
-        <Button onClick={() => handleNumOfTravelersClick(1)}>+</Button>
-        <div>{numOfTravelers}</div>
-        <Button onClick={() => handleNumOfTravelersClick(-1)}>-</Button>
+          <p>Antal resande: </p>
+          <Row>
+            <Col><Button className='px-5 fs-3' variant="warning" onClick={() => {(numOfTravelers == 0) ? setNumOfTravelers(0): handleNumOfTravelersClick(-1) }}>-</Button></Col>
+            <Col className='text-center pt-3'><div>{numOfTravelers}</div></Col>
+            <Col><Button className='px-5 fs-3' variant="warning" onClick={() => handleNumOfTravelersClick(1)}>+</Button></Col>
 
-      </div>
+          </Row>
+        </Card.Subtitle>
+        </Card>
       <div>
         Haer mountar vi komponent som renderar ut tåget och dess saeten
+        <Row className='text-center mb-5'>
         {
           trainData.seats.map((seat, id) => {
             return (
-              <div
+              <Col xs="2" className='bg-dark '>
+              <div id='seatDiv'
                 key={id}
                 onClick={() => handleSelectSeat(seat)}
               >
-                seatId: {seat.seatId} seatNumber: {seat.seatNumber}
-              </div>
+                {/*seatId: {seat.seatId} seatNumber: */}{seat.seatNumber}
+                </div>
+                </Col>
             )
           })
         }
+        </Row>
       </div>
     </>
   )

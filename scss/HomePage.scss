@@ -1,9 +1,11 @@
 #root {
   background-image: url("../public//Assets/Jada.jpeg");
-  height: 98vh;
-  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+max-height: max-content;  background-size: cover;
   background-position: center;
-  background-repeat: none;
+
+  
 }
 
 #testKnapp {

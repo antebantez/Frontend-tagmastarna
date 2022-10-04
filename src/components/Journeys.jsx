@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SelectSeats from '../pages/SelectSeats';
 import buildQuery from '../utilities/utilities';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card'
 
 const Journeys = ({ journeyData }) => {
 
@@ -25,18 +26,21 @@ const Journeys = ({ journeyData }) => {
 
   return (
     <>
-      <h2>Välj resa</h2>
+      <div className='mb-5'>
+      <h2 className='mt-5 text-center fw'>Välj resa</h2>
       {
         trainData ? <SelectSeats trainData={trainData} journeyData={selectedJourney} /> :
           journeyData && journeyData.map((journey, id) => {
             return <div key={id}>
-              <div>Från: {journey.startStation}</div>
-              <div>Till: {journey.endDestination}</div>
-              <div>
+              
+              <Card className='m-4 p-3 text-center'>
+              <Card.Title>Från: {journey.startStation}</Card.Title>
+              <Card.Title>Till: {journey.endDestination}</Card.Title>
+              <Card.Subtitle>
                 Avgångstid: {journey.depFromFirstStationTime.split('T')[0]} {journey.depFromFirstStationTime.split('T')[1].slice(0, 5)}
-              </div>
-              <div>Beräknad restid: {journey.endStationArrival - journey.startStationDeparture} minuter</div>
-              <Button
+              </Card.Subtitle>
+              <Card.Subtitle>Beräknad restid: {journey.endStationArrival - journey.startStationDeparture} minuter</Card.Subtitle>
+              <Button className='m-3' variant='warning'
                 onClick={() => {
                   handleBooking(
                     journey.journeyId,
@@ -52,9 +56,12 @@ const Journeys = ({ journeyData }) => {
               >
                 Boka biljett
               </Button>
+                </Card>
+                
             </div>
           })
-      }
+        }
+        </div>
     </>
   );
 }

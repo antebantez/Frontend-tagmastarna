@@ -26,16 +26,18 @@ const SearchJourneyForm = ({ handleSearch }) => {
     getStations();
   }, []);
 
-  return (
-    <Row className="searchJourneyForm">
+  return (<>
+    <Row className="mb-5"></Row>
+    <Row className="searchJourneyForm mt-5 ">
       <div className="form-wrapper">
-        <Form onSubmit={submitForm} autoComplete="on">
+        <Form onSubmit={submitForm} autoComplete="on" className="mt-5">
           <Form.Control
             type="text"
             name="startStation"
             value={startStation}
             placeholder="Från"
             onChange={(event) => setStartStationInput(event.target.value)}
+            className="m-3 p-2 fs-3"
           />
 
           <Form.Control
@@ -44,6 +46,7 @@ const SearchJourneyForm = ({ handleSearch }) => {
             value={endStation}
             placeholder="Till"
             onChange={(event) => setEndStationInput(event.target.value)}
+            className="m-3 p-2 fs-3"
           />
 
           <Form.Control
@@ -51,14 +54,16 @@ const SearchJourneyForm = ({ handleSearch }) => {
             name="date"
             value={date}
             onChange={(event) => setDateInput(event.target.value)}
+            className="m-3 p-2 fs-3"
           />
 
-          <Button type="submit" onClick={submitForm}>
+          <Button variant="warning" className="m-3 px-5 py-2" type="submit" onClick={submitForm}>
             Sök
           </Button>
         </Form>
       </div>
     </Row>
+    </>
   );
 };
 

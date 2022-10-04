@@ -1,9 +1,5 @@
 #hpDiv {
-  background-image: url("../public//Assets/Jada.jpeg");
-  height: 98vh;
-  background-size: cover;
   padding-top: 30vh;
-  background-position: center;
 }
 
 #testKnapp {
@@ -14,6 +10,19 @@
   padding-right: 20px;
   font-size: larger;
   font-weight: bolder;
-  background: rgb(199, 132, 7);
-  opacity: 80%;
+  background: rgb(199, 132, 7,.7);
+  
+}
+
+#searchJourneyTest{
+  margin-top: 30vh;
+}
+
+#seatDiv{
+  background-color: rgb(87, 182, 19);
+  max-width: 25px;
+  margin-top: 10px;
+  border-radius: 3px;
+  padding: 4px;
+  
 }

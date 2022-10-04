@@ -13,7 +13,7 @@ const Header = () => {
   let isHidden = doNotShowOnRoutes.includes(route);
 
   return isHidden ? null : (
-    <Row className="fixed-top mt-1">
+    <Row className="">
       <Col className="bg-transparant">
         <svg
           width="200"
