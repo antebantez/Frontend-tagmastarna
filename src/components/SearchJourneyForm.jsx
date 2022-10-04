@@ -27,7 +27,7 @@ const SearchJourneyForm = ({ handleSearch }) => {
   }, []);
 
   return (
-    <Row>
+    <Row className="searchJourneyForm">
       <div className="form-wrapper">
         <Form onSubmit={submitForm} autoComplete="on">
           <Form.Control

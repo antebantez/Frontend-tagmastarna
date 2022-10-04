@@ -25,8 +25,8 @@ const SearchJourney = () => {
 
   return (
     <>
-      <Row>
-        <Header />
+      <Row className="searchJourney">
+       
       </Row>
       <Row>
         {journeys ? (
@@ -42,7 +42,6 @@ const SearchJourney = () => {
         }
       </Row>
 
-      <Footer />
     </>
   );
 };

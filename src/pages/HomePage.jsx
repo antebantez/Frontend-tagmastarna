@@ -23,9 +23,7 @@ const HomePage = () => {
 
   return (
     <Container>
-      <Header />
       <SearchJourney />
-      <Footer />
     </Container>
   )
 }

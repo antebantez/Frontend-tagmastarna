@@ -1,9 +1,18 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import {useLocation} from "react-router-dom";
 
 const Header = () => {
-  return (
+  
+  // Logic to determine if the header should be shown
+  let route = useLocation().pathname;
+  let doNotShowOnRoutes = [
+    // '/SearchJourney'
+  ];
+  let isHidden = doNotShowOnRoutes.includes(route);
+
+  return isHidden ? null : (
     <Row className="fixed-top mt-1">
       <Col className="bg-transparant">
         <svg

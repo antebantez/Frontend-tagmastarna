@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 const Footer = () => {
   return (
-    <Row className='fixed-bottom  bg-dark'>
+    <Row className='fixed-bottom bg-dark'>
         <Col >
           
           <Button className='p-2' variant='dark'>
