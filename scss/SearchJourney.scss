@@ -26,3 +26,16 @@
   padding: 4px;
   
 }
+
+#selectRoutesForm{
+  background: rgb(199, 132, 7, .8);
+  
+}
+
+#selectRoutesForm::-webkit-input-placeholder {
+  color: white;
+}
+
+#selectRoutesForm::selection{
+  box-shadow: rgb(199, 132, 7, .8);
+}

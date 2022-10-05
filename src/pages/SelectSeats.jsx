@@ -34,7 +34,7 @@ const SelectSeats = ({ trainData, journeyData }) => {
 
           <p>Antal resande: </p>
           <Row>
-            <Col><Button className='px-5 fs-3' variant="warning" onClick={() => {(numOfTravelers == 0) ? setNumOfTravelers(0): handleNumOfTravelersClick(-1) }}>-</Button></Col>
+            <Col><Button className='px-5 fs-3' variant="warning" onClick={() => handleNumOfTravelersClick(-1) }>-</Button></Col>
             <Col className='text-center pt-3'><div>{numOfTravelers}</div></Col>
             <Col><Button className='px-5 fs-3' variant="warning" onClick={() => handleNumOfTravelersClick(1)}>+</Button></Col>
 
