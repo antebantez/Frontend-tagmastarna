@@ -1,0 +1,41 @@
+#hpDiv {
+  padding-top: 30vh;
+}
+
+#testKnapp {
+  border-radius: 25px;
+  width: 60vw;
+  height: 10vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: larger;
+  font-weight: bolder;
+  background: rgb(199, 132, 7,.7);
+  
+}
+
+#searchJourneyTest{
+  margin-top: 30vh;
+}
+
+#seatDiv{
+  background-color: rgb(87, 182, 19);
+  max-width: 25px;
+  margin-top: 10px;
+  border-radius: 3px;
+  padding: 4px;
+  
+}
+
+#selectRoutesForm{
+  background: rgb(199, 132, 7, .8);
+  
+}
+
+#selectRoutesForm::-webkit-input-placeholder {
+  color: white;
+}
+
+#selectRoutesForm::selection{
+  box-shadow: rgb(199, 132, 7, .8);
+}

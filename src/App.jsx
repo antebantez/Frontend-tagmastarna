@@ -6,6 +6,8 @@ import TicketPage from './pages/TicketPage'
 import Booking from "./pages/Booking";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import '../scss/App.scss';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 
 
@@ -15,7 +17,8 @@ function App() {
       {/* We can add components before and after <routes /> */}
       {/* They are shown for all pages */}
 
-      <main>
+      <main className="container-fluid">
+        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/searchJourney" element={<SearchJourney />} />
@@ -23,6 +26,7 @@ function App() {
           <Route path="/ticketPage" element={<TicketPage />} />
           <Route path="/booking" element={<Booking />} />
         </Routes>
+        <Footer />
       </main>
 
     </BrowserRouter>

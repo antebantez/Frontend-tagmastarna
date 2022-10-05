@@ -1,12 +1,16 @@
-#hpDiv{
-  background-image: url('../public//Assets/Sunset-Wallpaper-For-Phone-HD.jpg');
-  height: 89vh;
-  background-size: cover;
-  padding-top: 30vh;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+#root {
+  background-image: url("../public//Assets/Jada.jpeg");
+  background-attachment: fixed;
+  min-height: 100vh;
+max-height: max-content;  background-size: cover;
+  background-position: center;
+font-family: 'Roboto Mono', monospace;
+  
 }
 
-#testKnapp{
-  border-radius: 50px;
+#testKnapp {
+  border-radius: 25px;
   width: 60vw;
   height: 10vh;
   padding-left: 20px;
