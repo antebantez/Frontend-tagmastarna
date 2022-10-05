@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Payment from '../components/Payment';
 import Card from 'react-bootstrap/Card';
+import { Col, Row } from 'react-bootstrap';
 
 const Booking = () => {
   const location = useLocation();
@@ -29,8 +30,8 @@ const Booking = () => {
 
   return (
     <>
-      <Card className='p-2'>
-        <h2>Slutför bokning</h2>
+      <Card className='p-2 mt-5'>
+        <h2 style={{ 'textAlign': 'center' }}>Slutför bokning</h2>
         {
           !makePayment ?
             <div>
@@ -59,26 +60,28 @@ const Booking = () => {
                 })
               }
               <div>
-                <h5>Resenärer</h5>
-                <div>
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, adult: previousState.adult + 1 }))}>+</div>
-                  Vuxen: {travelerCategories.adult}
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, adult: previousState.adult - 1 }))}>-</div>
-                </div>
-                <div>
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, child: previousState.child + 1 }))}>+</div>
-                  Barn: {travelerCategories.child}
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, child: previousState.child - 1 }))}>-</div>
-                </div>
-                <div>
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, senior: previousState.senior + 1 }))}>+</div>
-                  Pensionär: {travelerCategories.senior}
-                  <div onClick={() => setTravelerCategories(previousState => ({ ...previousState, senior: previousState.senior - 1 }))}>-</div>
-                </div>
-                <div>
-                  Att betala:
-                </div>
-                <Button onClick={() => addTravelersDataToTicket()}>Fortsätt</Button>
+                <h5 style={{ 'marginTop': '20px', 'textAlign': 'center' }}>Resenärer</h5>
+                <Row className='text-center mb-2'>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, adult: previousState.adult - 1 }))}>-</Button></Col>
+                  <Col className='mx-4'><div>Vuxen: {travelerCategories.adult}</div></Col>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, adult: previousState.adult + 1 }))}>+</Button></Col>
+                </Row>
+                <Row className='text-center mb-2'>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, child: previousState.child - 1 }))}>-</Button></Col>
+                  <Col className='mx-4'><div>Barn: {travelerCategories.child}</div></Col>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, child: previousState.child + 1 }))}>+</Button></Col>
+                </Row>
+                <Row className='text-center mb-2'>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, senior: previousState.senior - 1 }))}>-</Button></Col>
+                  <Col xs='5'><div>Pensionär: {travelerCategories.senior}</div></Col>
+                  <Col><Button variant='warning' onClick={() => setTravelerCategories(previousState => ({ ...previousState, senior: previousState.senior + 1 }))}>+</Button></Col>
+                </Row>
+                <Row>
+                  <div style={{ 'fontSize': '20px', 'marginTop': '20px', 'marginBottom': '20px', 'textAlign': 'center' }}>Att betala:</div>
+                </Row>
+                <Row className='justify-content-center'>
+                  <Button className='w-50' variant='warning' onClick={() => addTravelersDataToTicket()}>Fortsätt</Button>
+                </Row>
               </div>
             </div>
             :
@@ -87,7 +90,7 @@ const Booking = () => {
               <Payment ticket={ticket}></Payment>
             </div>
         }
-      </Card>
+      </Card >
     </>
   );
 }

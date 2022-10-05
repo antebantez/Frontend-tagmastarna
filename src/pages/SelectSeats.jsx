@@ -8,7 +8,9 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seatsToSelect, setSeatsToSelect] = useState(numOfSeats);
 
-  const handleSelectSeat = (seat) => {
+  const handleSelectSeat = (seat, eventTarget) => {
+    eventTarget.classList.toggle('seat');
+    eventTarget.classList.toggle('seatSelected');
     setSelectedSeats([...selectedSeats, seat]);
     ticket.addSeatReservation(
       seat.journeyId, seat.carriageId, seat.seatId, seat.seatNumber
@@ -18,8 +20,16 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
 
   return (
     <>
-      <h3>Välj säten</h3>
-      <div>
+      <h3 style={{ 'color': 'white', 'textAlign': 'center', 'marginTop': '15px' }}>Välj säten</h3>
+      {
+        seatsToSelect === 0 &&
+        <Row className='text-center'>
+          < Link to={'/booking'} state={{ ticket: ticket }} >
+            <Button className='w-50' variant='warning'>Bekräfta</Button>
+          </Link>
+        </Row>
+      }
+      <div style={{ 'color': 'white' }}>
         Mina val:
         {
           selectedSeats > 0 && selectedSeats.map((seat, id) => {
@@ -33,34 +43,17 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
         }
       </div>
       <div>
-        <Row >
-          {
-            seatsToSelect === 0 &&
-            < Link to={'/booking'} state={{ ticket: ticket }} >
-              <Button>Bekräfta</Button>
-            </Link>
-          }
+        <Row className='text-center'>
           {
             seatData.seats.map((seat, id) => {
               return (
                 <Col xs="2" className='text-white' >
-                  <div
+                  <div className='seat'
                     key={id}
-                    onClick={() => handleSelectSeat(seat)}
-                    style={
-                      {
-                        color: 'white',
-                        backgroundColor: 'green',
-                        padding: '10px',
-                        margin: '10px',
-                        maxWidth: '300px',
-                        justifyContent: 'center'
-
-                      }
-                    }
+                    onClick={(event) => handleSelectSeat(seat, event.currentTarget)}
                   >
+                    {seat.seatNumber}
                   </div>
-                  {seat.seatNumber}
                 </Col>
               )
             })

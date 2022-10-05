@@ -10,32 +10,51 @@
   padding-right: 20px;
   font-size: larger;
   font-weight: bolder;
-  background: rgb(199, 132, 7,.7);
-  
+  background: rgb(199, 132, 7, .7);
+
 }
 
-#searchJourneyTest{
+#searchJourneyTest {
   margin-top: 30vh;
 }
 
-#seatDiv{
+.seat {
   background-color: rgb(87, 182, 19);
+  color: white;
   max-width: 25px;
   margin-top: 10px;
   border-radius: 3px;
   padding: 4px;
-  
+
 }
 
-#selectRoutesForm{
+#selectRoutesForm {
   background: rgb(199, 132, 7, .8);
-  
+
 }
 
 #selectRoutesForm::-webkit-input-placeholder {
   color: white;
 }
 
-#selectRoutesForm::selection{
+#selectRoutesForm::selection {
   box-shadow: rgb(199, 132, 7, .8);
+}
+
+/* .seat {
+  color: white;
+  background: green;
+  padding: 15px;
+  margin: 10px;
+  max-width: 300px;
+  justify-content: center;
+} */
+
+.seatSelected {
+  max-width: 25px;
+  margin-top: 10px;
+  border-radius: 3px;
+  padding: 4px;
+  color: white;
+  background: rgb(69, 142, 226);
 }

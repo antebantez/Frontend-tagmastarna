@@ -50,7 +50,6 @@ class Ticket {
     }
 
     getBookingData() {
-        console.log(this.formatDepartureDateTime());
         return {
             customerId: 2,
             journeyId: this.journeyId,
