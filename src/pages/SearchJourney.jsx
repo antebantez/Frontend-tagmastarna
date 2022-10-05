@@ -3,8 +3,6 @@ import { useState } from "react";
 import SearchJourneyForm from "../components/SearchJourneyForm";
 import Journeys from "../components/Journeys";
 import buildQuery from "../utilities/utilities";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import { Row, Col } from "react-bootstrap";
 
 const SearchJourney = () => {

@@ -44,12 +44,17 @@ class Ticket {
         // call static methods of Price class to calculate prices 
     }
 
+    formatDepartureDateTime() {
+        return new Date(dt.setMinutes(dt.getMinutes() + this.startStationDeparture)).toLocaleString();
+    }
+
     getBookingData() {
+        console.log(this.formatDepartureDateTime());
         return {
             customerId: 2,
             journeyId: this.journeyId,
             cancellationProtection: this.cancellationProtection,
-            departureTime: '2022-10-05 09:23:00',
+            departureTime: this.formatDepartureDateTime(),
             startStationId: this.startStationId,
             endStationId: this.endStationId,
             travelers: this.travelers
