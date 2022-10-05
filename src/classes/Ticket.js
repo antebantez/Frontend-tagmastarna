@@ -45,6 +45,7 @@ class Ticket {
     }
 
     formatDepartureDateTime() {
+        let dt = new Date(this.depFromFirstStationTime);
         return new Date(dt.setMinutes(dt.getMinutes() + this.startStationDeparture)).toLocaleString();
     }
 
