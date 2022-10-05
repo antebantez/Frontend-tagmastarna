@@ -27,12 +27,6 @@ const SearchJourney = () => {
         journeys ? <Journeys journeyData={journeys} /> :
           <SearchJourneyForm handleSearch={handleSearch} />
       }
-      {
-        //<SearchJourneyForm handleSearch={handleSearch} />
-      }
-      {
-        //journeys && <Journeys journeyData={journeys} />
-      }
     </>
   );
 }

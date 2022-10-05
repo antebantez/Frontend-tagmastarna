@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Payment from '../components/Payment';
 
 const Booking = () => {
   const location = useLocation();
-  const [ticket, setTicket] = useState(location.state.ticket);
+  const [ticket] = useState(location.state.ticket);
   const [travelerCategories, setTravelerCategories] = useState(
     { adult: 0, child: 0, senior: 0 }
   );
@@ -23,30 +24,6 @@ const Booking = () => {
       }
     });
     setMakePayment(true);
-  }
-
-  const finalizePayment = async () => {
-    const postBookingResponse = await fetch(
-      `/api/booking`,
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ticket.getBookingData())
-      }
-    )
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-        }
-      )
-      .catch(err => {
-        console.log(err);
-      });
-    console.log(postBookingResponse);
   }
 
   return (
@@ -101,11 +78,11 @@ const Booking = () => {
               </div>
               <Button onClick={() => addTravelersDataToTicket()}>Fortsätt</Button>
             </div>
-          </div> :
+          </div>
+          :
           <div>
-            BETALA
             {console.log(ticket.getBookingData())}
-            <Button onClick={() => finalizePayment()}>Slutför betalning</Button>
+            <Payment ticket={ticket}></Payment>
           </div>
       }
     </>

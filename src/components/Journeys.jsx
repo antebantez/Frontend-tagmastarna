@@ -13,7 +13,8 @@ const Journeys = ({ journeyData }) => {
     const query = buildQuery(journeyInfo)
     try {
       const handleBookingResponse = await fetch(
-        `/api/selectSeats/seats/${journeyId}${query}`
+        //`/api/selectSeats/seats/${journeyId}${query}`
+        `/api/selectSeats/seats/${journeyId}?departure=${journeyInfo.departure}&arrival=${journeyInfo.arrival}`
       );
       const json = await handleBookingResponse.json();
       setTicket(new Ticket(journey));
@@ -35,9 +36,7 @@ const Journeys = ({ journeyData }) => {
               <div key={id}>
                 <div>Från: {journey.startStation}</div>
                 <div>Till: {journey.endDestination}</div>
-                <div>
-                  Avgångstid: {journey.depFromFirstStationTime.split('T')[0]} {journey.depFromFirstStationTime.split('T')[1].slice(0, 5)}
-                </div>
+                <div>Avgångstid: {new Date(new Date(journey.depFromFirstStationTime).setMinutes(new Date(journey.depFromFirstStationTime).getMinutes() + journey.startStationDeparture)).toLocaleString()}</div>
                 <div>Beräknad restid: {journey.endStationArrival - journey.startStationDeparture} minuter</div>
                 <Button
                   onClick={() => {

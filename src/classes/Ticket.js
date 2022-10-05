@@ -2,8 +2,8 @@ class Ticket {
 
     seats = [];
     travelers = [];
-    firstClass = false;
-    cancellationProtection = false;
+    firstClass = 0; //false;
+    cancellationProtection = 0; //false;
 
     constructor(data) {
         Object.assign(this, data);
@@ -25,7 +25,6 @@ class Ticket {
     }
 
     addTraveler(travelerDataObject) {
-        console.log(travelerDataObject);
         this.travelers.push(travelerDataObject);
     }
 
@@ -58,6 +57,9 @@ class Ticket {
     }
 
     getTicketRenderInfo() {
+        let dt = new Date(this.depFromFirstStationTime)
+        dt.setMinutes(dt.getMinutes() + this.startStationDeparture);
+
         let ticketInfo = [
             {
                 description: 'Från: ',
@@ -69,7 +71,7 @@ class Ticket {
             },
             {
                 description: 'Avgångstid: ',
-                value: `${this.depFromFirstStationTime} + ${this.startStationDeparture}`
+                value: `${dt.toLocaleString()}`
             },
             {
                 description: 'Beräknad restid: ',

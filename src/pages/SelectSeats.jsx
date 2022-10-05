@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
-import Booking from './Booking';
 import { Link } from 'react-router-dom';
-import Ticket from '../classes/Ticket';
 
 const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
