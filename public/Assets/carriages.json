@@ -1,0 +1,53 @@
+[
+  {
+    "carriageType": 1,
+    "seats": 54,
+    "handicapSpace": [
+      46,
+      49,
+      52
+    ],
+    "hasBistro": false,
+    "maneuverCart": false,
+    "firstClass": true,
+    "petsAllowed": false
+  },
+  {
+    "carriageType": 2,
+    "seats": 74,
+    "handicapSpace": [
+      3,
+      4,
+      71,
+      72
+    ],
+    "hasBistro": false,
+    "maneuverCart": false,
+    "firstClass": false,
+    "petsAllowed": false
+  },
+  {
+    "carriageType": 3,
+    "seats": 28,
+    "handicapSpace": [
+      3,
+      4
+    ],
+    "hasBistro": true,
+    "maneuverCart": false,
+    "firstClass": false,
+    "petsAllowed": false
+  },
+  {
+    "carriageType": 4,
+    "seats": 42,
+    "handicapSpace": [
+      79,
+      80
+    ],
+    "hasBistro": false,
+    "maneuverCart": true,
+    "firstClass": false,
+    "petsAllowed": true
+  }
+]
