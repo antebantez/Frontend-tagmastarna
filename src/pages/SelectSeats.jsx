@@ -94,9 +94,9 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
           }) */
         }
       </div>
-      <Card>
+      <Card className='bg-dark'>
         <Row className='text-center'>
-          <div className='relative flex items-center'>
+          <div className='relative flex items-center text-white'>
             <div onClick={slideLeft}>{'<'}</div>
             <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth'>
               {
@@ -117,7 +117,7 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
               }
             </div>
           </div>
-          <div onClick={slideRight}>{'>'}</div>
+          <div className='' onClick={slideRight}>{'>'}</div>
         </Row>
       </Card>
     </>
