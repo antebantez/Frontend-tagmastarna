@@ -12,7 +12,7 @@ const Payment = ({ ticket }) => {
   const [paymentDetails, setPaymentDetails] = useState('');
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const [confirmedBookingData, setConfirmedBookingData] = useState({});
-
+  const [validated, setValidated] = useState(false)
   const finalizePayment = async () => {
     let customerId;
     const getCustomerResponse = await fetch(
@@ -81,7 +81,7 @@ const Payment = ({ ticket }) => {
   return (
     <>
       <h4>Betalning</h4>
-      <Form>
+      <Form noValidate validated={validated}>
         <Form.Control className='mt-2 mb-2'
           type='text'
           name='name'
@@ -111,7 +111,7 @@ const Payment = ({ ticket }) => {
           onChange={(event) => setPaymentDetails(event.target.value)}
         />
         <Row className='justify-content-center'>
-          <Button className='mt-4 w-75' variant='warning' onClick={() => finalizePayment()}>Genomför betalning</Button>
+          <Button type='submit' className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
         </Row>
       </Form>
       {
@@ -130,7 +130,7 @@ const Payment = ({ ticket }) => {
               })
             }
             <Row className='p-5'>
-              <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" />
+              <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${confirmedBookingData.bookingId}&amp;size=100x100`} alt="" title="" />
             </Row>
           </Modal.Body>
 
