@@ -13,6 +13,7 @@ const Payment = ({ ticket }) => {
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const [confirmedBookingData, setConfirmedBookingData] = useState({});
   const [validated, setValidated] = useState(false)
+
   const finalizePayment = async () => {
     let customerId;
     const getCustomerResponse = await fetch(
@@ -111,7 +112,7 @@ const Payment = ({ ticket }) => {
           onChange={(event) => setPaymentDetails(event.target.value)}
         />
         <Row className='justify-content-center'>
-          <Button type='submit' className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
+          <Button onClick={() => finalizePayment()} className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
         </Row>
       </Form>
       {

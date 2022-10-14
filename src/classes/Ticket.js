@@ -2,8 +2,8 @@ class Ticket {
 
     seats = [];
     travelers = [];
-    firstClass = 0; //false;
-    cancellationProtection = 0; //false;
+    firstClass = 0;
+    cancellationProtection = 0;
 
     constructor(data) {
         Object.assign(this, data);
@@ -38,6 +38,15 @@ class Ticket {
 
     setFirstClass(firstClass) {
         this.firstClass = firstClass;
+    }
+
+    setCancellationProtection(boolValue) {
+        if (boolValue === true) {
+            this.cancellationProtection = 1;
+        }
+        else {
+            this.cancellationProtection = 0;
+        }
     }
 
     calculatePrice() {

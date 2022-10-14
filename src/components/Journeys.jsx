@@ -19,6 +19,7 @@ const Journeys = ({ journeyData }) => {
       );
       const json = await handleBookingResponse.json();
       setTicket(new Ticket(journey));
+      json.data.numOfFreeSeats = json.data.seats.filter(x => x.seat_booked_bool !== 1).length
       setTrainData(json.data);
       setSelectedJourney(journey);
     }
