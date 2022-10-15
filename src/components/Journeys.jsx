@@ -18,8 +18,10 @@ const Journeys = ({ journeyData }) => {
         `/api/selectSeats/seats/${journeyId}?departure=${journeyInfo.departure}&arrival=${journeyInfo.arrival}`
       );
       const json = await handleBookingResponse.json();
+      let numOfFreeSeats = json.data.seats.filter(x => x.seat_booked_bool !== 1).length;
+      json.data.numOfFreeSeats = numOfFreeSeats;
+      journey.freeSeatsFraction = numOfFreeSeats / json.data.seats.length;
       setTicket(new Ticket(journey));
-      json.data.numOfFreeSeats = json.data.seats.filter(x => x.seat_booked_bool !== 1).length
       setTrainData(json.data);
       setSelectedJourney(journey);
     }

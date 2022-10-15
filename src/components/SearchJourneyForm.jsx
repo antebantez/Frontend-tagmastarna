@@ -14,13 +14,11 @@ const SearchJourneyForm = ({ handleSearch }) => {
     handleSearch({ startStation, endStation, date });
   };
 
-  // to be used for autosuggesting stations
   useEffect(() => {
     const getStations = async () => {
       const response = await fetch("/api/searchJourney/stations");
       const json = await response.json();
-
-      setStations(json.data);
+      setStations(Array.from(new Set(json.data)));
     };
 
     getStations();
@@ -40,17 +38,16 @@ const SearchJourneyForm = ({ handleSearch }) => {
               value={startStation}
               placeholder="Från"
               onChange={(event) => setStartStationInput(event.target.value)}
-              className="m-3 p-2 fs-3 border-0 "
+              className="m-3 p-2 fs-3 border-0"
             />
             <datalist id='list-stations'>
               {
-                stations && stations.map(({ station, id }) => {
-                  <option key={id}>{station}</option>
-                })
+                stations && stations.map((station) => <option key={station}>{station}</option>)
               }
             </datalist>
 
             <Form.Control
+              list="list-destination-stations"
               id="selectRoutesForm"
               type="text"
               name="endStation"
@@ -59,6 +56,11 @@ const SearchJourneyForm = ({ handleSearch }) => {
               onChange={(event) => setEndStationInput(event.target.value)}
               className="m-3 p-2 fs-3 border-0"
             />
+            <datalist id='list-destination-stations'>
+              {
+                stations && stations.map((station) => <option key={station}>{station}</option>)
+              }
+            </datalist>
 
             <Form.Control
               id="selectRoutesForm"

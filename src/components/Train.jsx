@@ -9,7 +9,7 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seatsToSelect, setSeatsToSelect] = useState(number)
 
-  const handleSelectSeats = (seat, eventTarget) => {
+  const handleSelectSeats = (seat, eventTarget, carriageType) => {
     let x = selectedSeats.find(x => x.seatId == seat.seatId);
     if (selectedSeats.find(x => x.seatId == seat.seatId)) {
       eventTarget.classList.toggle('seat');
@@ -21,6 +21,7 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
       eventTarget.classList.toggle('seat');
       eventTarget.classList.toggle('seatSelected');
       setSelectedSeats([...selectedSeats, seat]);
+      carriageType === 1 ? ticket.setFirstClass(1) : ticket.setFirstClass(0);
     }
   }
 
@@ -78,7 +79,7 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
                                         className={seat.seat_booked_bool ? 'px-3 py-2 fw-bold m-1 rounded occupiedSeat' : 'px-3 py-2 fw-bold m-1 rounded seat'}
                                         id={seat.seatId}
                                         key={x}
-                                        onClick={seat.seat_booked_bool ? () => { } : (event) => handleSelectSeats(seat, event.currentTarget)}
+                                        onClick={seat.seat_booked_bool ? () => { } : (event) => handleSelectSeats(seat, event.currentTarget, carriage.carriageType)}
                                       >
                                         {seat.seatNumber}
                                       </div>

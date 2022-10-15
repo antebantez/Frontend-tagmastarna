@@ -13,8 +13,9 @@ const Booking = () => {
     { adult: 0, child: 0, senior: 0, youth: 0, student: 0 }
   );
   const [makePayment, setMakePayment] = useState(false);
-  const [numOfTravelers, setNumOfTravelers] = useState(ticket.seats.length);
+  const [numOfTravelers, setNumOfTravelers] = useState(ticket.getSeats().length);
   const [travelerCategoriesSelected, setTravelerCategoriesSelected] = useState(0);
+  const [totalPrice, setTotalPrice] = useState('');
 
   const addTravelersDataToTicket = () => {
     let seatIds = [];
@@ -42,6 +43,11 @@ const Booking = () => {
       setTravelerCategories(previousState => ({ ...previousState, [category]: previousState[category] + change }));
       setTravelerCategoriesSelected(travelerCategoriesSelected + change);
     }
+  }
+
+  const addCancellationProtection = (e) => {
+    ticket.setCancellationProtection(e);
+    setTotalPrice(ticket.getPrice(travelerCategories));
   }
 
   return (
@@ -102,7 +108,7 @@ const Booking = () => {
                   <Col><Button variant='warning' onClick={() => travelerCategoryChange('senior', +1)}>+</Button></Col>
                   <Form >
                     <Form.Check
-                      onClick={(e) => { ticket.setCancellationProtection(e.target.checked) }}
+                      onClick={(e) => addCancellationProtection(e.target.checked)/* { ticket.setCancellationProtection(e.target.checked) } */}
                       className='text-center mx-5 px-5 mt-3 fw-bold'
                       reverse={true}
                       type="checkbox"
@@ -111,9 +117,16 @@ const Booking = () => {
                     />
                   </Form>
                 </Row>
-                <Row>
-                  <div style={{ 'fontSize': '20px', 'marginTop': '20px', 'marginBottom': '20px', 'textAlign': 'center' }}>Att betala:</div>
-                </Row>
+                {
+                  travelerCategoriesSelected === numOfTravelers &&
+                  <Row>
+                    <div
+                      style={{ 'fontSize': '20px', 'marginTop': '20px', 'marginBottom': '20px', 'textAlign': 'center' }}
+                    >
+                      Att betala: {totalPrice/* ticket.getPrice(travelerCategories) */}
+                    </div>
+                  </Row>
+                }
 
                 {
                   travelerCategoriesSelected === numOfTravelers &&
