@@ -6,7 +6,7 @@ class Ticket {
     #travelers = [];
     #firstClass = 0;
     #cancellationProtection = 0;
-    #freeSeatsFraction;
+    //#freeSeatsFraction;
 
     constructor(data) {
         Object.assign(this, data);
@@ -78,7 +78,7 @@ class Ticket {
             departureTime: this.formatDepartureDateTime(),
             startStationId: this.startStationId,
             endStationId: this.endStationId,
-            travelers: this.travelers
+            travelers: this.#travelers
         }
     }
 

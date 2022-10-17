@@ -27,11 +27,10 @@ const SearchJourney = () => {
 
       </Row>
       <Row id="searchJourneyTest" className="mt-5">
-        {journeys ? (
-          <Journeys journeyData={journeys} />
-        ) : (
-          <SearchJourneyForm handleSearch={handleSearch} />
-        )}
+        {
+          journeys ? (<Journeys journeyData={journeys} />) :
+            (<SearchJourneyForm handleSearch={handleSearch} />)
+        }
       </Row>
 
     </>

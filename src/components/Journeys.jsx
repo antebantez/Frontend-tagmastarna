@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import buildQuery from '../utilities/utilities';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import CustomizeJourney from './CustomizeJourney';
 import Ticket from '../classes/Ticket';
 import Card from 'react-bootstrap/Card'
@@ -14,7 +15,6 @@ const Journeys = ({ journeyData }) => {
     const query = buildQuery(journeyInfo)
     try {
       const handleBookingResponse = await fetch(
-        //`/api/selectSeats/seats/${journeyId}${query}`
         `/api/selectSeats/seats/${journeyId}?departure=${journeyInfo.departure}&arrival=${journeyInfo.arrival}`
       );
       const json = await handleBookingResponse.json();
@@ -31,9 +31,21 @@ const Journeys = ({ journeyData }) => {
   }
 
   return (
+
     <>
-      <div className='mb-5'>
-        <h2 className='mt-5 text-center fw'>Välj resa</h2>
+      <div className='mb-5 mt-5 '>
+        <h2 className='mt-5 text-center fw-bold'>Välj resa</h2>
+        {
+          journeyData.length === 0 &&
+          <Card className='p-5 text-center '>
+            <div className='fw-bold'>
+              Inga resor hittades
+            </div>
+            <Link to='/searchJourney'>
+              <Button variant='warning' className='px-4 py-3 mt-4' onClick={() => location.reload()}>Återgå till sök</Button>
+            </Link>
+          </Card>
+        }
         {
           trainData ? <CustomizeJourney trainData={trainData} journeyData={selectedJourney} ticket={ticket} /> :
             journeyData && journeyData.map((journey, id) => {

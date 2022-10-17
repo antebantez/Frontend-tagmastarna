@@ -50,11 +50,12 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
 
         <Row className=''>
           <div className=''>
-            <Carousel controls={false} interval={null}>
+            <Carousel controls={false} interval={null} touch={selectedSeats.length > 0 ? false : true}
+              indicators={selectedSeats.length > 0 ? false : true}>
               {
-                trainData.map((carriage) => {
+                trainData.map((carriage, x) => {
                   return (
-                    <Carousel.Item>
+                    <Carousel.Item key={x}>
 
                       <Col xs="12" className=''>
                         <div className='text-white mt-3'>
@@ -73,9 +74,8 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
                               {
                                 carriage.seats.map((seat, x) => {
                                   return (
-                                    <Col>
+                                    <Col key={x}>
                                       <div
-                                        //className='px-3 py-2 fw-bold m-1 rounded seat'
                                         className={seat.seat_booked_bool ? 'px-3 py-2 fw-bold m-1 rounded occupiedSeat' : 'px-3 py-2 fw-bold m-1 rounded seat'}
                                         id={seat.seatId}
                                         key={x}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 const SearchJourneyForm = ({ handleSearch }) => {
   const [startStation, setStartStationInput] = useState("");
@@ -65,6 +65,7 @@ const SearchJourneyForm = ({ handleSearch }) => {
             <Form.Control
               id="selectRoutesForm"
               type="date"
+              min={new Date().toISOString().slice(0, 10)}
               name="date"
               value={date}
               onChange={(event) => setDateInput(event.target.value)}

@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
-import { Col, Row } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import Train from '../components/Train';
 
 const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
-  //const [selectedSeats, setSelectedSeats] = useState([]);
-  const [seatsToSelect, setSeatsToSelect] = useState(numOfSeats);
+  const [seatsToSelect] = useState(numOfSeats);
   const [carriageData, setCarriageData] = useState(null);
 
   const formatSeatData = () => {
@@ -40,7 +37,7 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
     return formatedTrainData;
   }
 
-  const [formatedTrainData, setFormatedTrainData] = useState(() => formatSeatData());
+  const [formatedTrainData] = useState(() => formatSeatData());
 
   const handleSelectSeats = (seats) => {
     for (let seat of seats) {

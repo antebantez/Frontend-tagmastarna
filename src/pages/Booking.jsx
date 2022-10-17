@@ -66,20 +66,6 @@ const Booking = () => {
                   )
                 })
               }
-              {
-                /* ticket.getSeats().map((seat, id) => {
-                  return (
-                    <div key={id}>
-                      <div >
-                        Plats: {seat.seat_id}
-                      </div>
-                      <div >
-                        Vagn: {seat.carriageId}
-                      </div>
-                    </div>
-                  )
-                })
-               */}
               <div>
                 <h5 style={{ 'marginTop': '20px', 'textAlign': 'center' }}>Resenärer</h5>
                 <Row className='text-center mb-2'>
@@ -108,7 +94,7 @@ const Booking = () => {
                   <Col><Button variant='warning' onClick={() => travelerCategoryChange('senior', +1)}>+</Button></Col>
                   <Form >
                     <Form.Check
-                      onClick={(e) => addCancellationProtection(e.target.checked)/* { ticket.setCancellationProtection(e.target.checked) } */}
+                      onClick={(e) => addCancellationProtection(e.target.checked)}
                       className='text-center mx-5 px-5 mt-3 fw-bold'
                       reverse={true}
                       type="checkbox"
@@ -123,7 +109,7 @@ const Booking = () => {
                     <div
                       style={{ 'fontSize': '20px', 'marginTop': '20px', 'marginBottom': '20px', 'textAlign': 'center' }}
                     >
-                      Att betala: {totalPrice/* ticket.getPrice(travelerCategories) */}
+                      Att betala: {totalPrice}
                     </div>
                   </Row>
                 }
