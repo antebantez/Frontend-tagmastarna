@@ -114,7 +114,7 @@ const Booking = () => {
                     <div
                       style={{ 'fontSize': '20px', 'marginTop': '20px', 'marginBottom': '20px', 'textAlign': 'center' }}
                     >
-                      Att betala: {totalPrice}
+                      Att betala: {totalPrice} kr
                     </div>
                   </Row>
                 }
