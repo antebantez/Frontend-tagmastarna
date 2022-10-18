@@ -7,18 +7,30 @@ import { Col, Row } from 'react-bootstrap';
 const CustomizeJourney = ({ trainData, journeyData, ticket }) => {
   const [continueBooking, setContinueBooking] = useState(false);
   const [numOfTravelers, setNumOfTravelers] = useState(1);
-  const [seatsToSelect, setSeatsToSelect] = useState(1);
   const journeyDepartureTime = new Date(journeyData.depFromFirstStationTime);
   journeyDepartureTime.setMinutes(journeyDepartureTime.getMinutes() + journeyData.startStationDeparture);
 
   const handleNumOfTravelersClick = (valueChange) => {
     setNumOfTravelers((previousValue) => previousValue + valueChange);
-    setSeatsToSelect((previousValue) => previousValue + valueChange);
     if (numOfTravelers <= 0) {
       setNumOfTravelers(1);
     }
     if (numOfTravelers >= 9) {
-      setNumOfTravelers(1, alert("Max 9 passangers!"));
+      setNumOfTravelers(1);
+      alert("Max 9 passangers!");
+    }
+  }
+
+  const disabledTravelersButton = () => {
+    if (numOfTravelers <= 0) {
+      return (
+        <Button disabled variant='warning' className='m-3 w-50 mt-4' onClick={() => setContinueBooking(true)}>Fortsätt</Button>
+      )
+    }
+    else {
+      return (
+        <Button variant='warning' className='m-3 w-50 mt-4' onClick={() => setContinueBooking(true)}>Fortsätt</Button>
+      )
     }
   }
 
@@ -40,8 +52,8 @@ const CustomizeJourney = ({ trainData, journeyData, ticket }) => {
         </Card.Subtitle>
       </Card>
       <Row className='justify-content-center'>
-        {continueBooking ? <SelectSeats seatData={trainData} numOfSeats={seatsToSelect} ticket={ticket} /> :
-          <Button variant='warning' className='m-3 w-50 mt-4' onClick={() => setContinueBooking(true)}>Fortsätt</Button>}
+        {continueBooking ? <SelectSeats seatData={trainData} numOfSeats={numOfTravelers} ticket={ticket} /> :
+          disabledTravelersButton()}
       </Row>
     </>
   )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { Col, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
@@ -8,10 +9,13 @@ import { Link } from 'react-router-dom';
 const Payment = ({ ticket }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [emailValid, setEmailValid] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [paymentDetails, setPaymentDetails] = useState('');
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const [confirmedBookingData, setConfirmedBookingData] = useState({});
+  const [qrCode, setQrCode] = useState(null);
+  const [qrCodeLoading, setQrCodeLoading] = useState(true);
 
   const finalizePayment = async () => {
     let customerId;
@@ -48,8 +52,6 @@ const Payment = ({ ticket }) => {
 
     const postRequestBody = await ticket.getBookingData();
     postRequestBody.customerId = customerId;
-    console.log(customerId);
-    console.log(postRequestBody);
     await fetch(
       `/api/booking`,
       {
@@ -64,7 +66,6 @@ const Payment = ({ ticket }) => {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           setPaymentSuccessful(true);
           postRequestBody.bookingId = result.bookingId;
           let bookingDataObject = postRequestBody;
@@ -75,44 +76,119 @@ const Payment = ({ ticket }) => {
       .catch(err => {
         console.log(err);
       });
+    fetchQrCode();
+  }
 
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    validateEmail(e);
+  }
+
+  const validateEmail = (e) => {
+    const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (e.target?.value && e.target.value.match(validEmail)) {
+      setEmailValid(true);
+      setEmail(e.target.value)
+    }
+    else {
+      setEmailValid(false);
+      setEmail(e.target.value)
+    }
+  }
+
+  const handlePhoneNumber = (e) => {
+    setPhoneNumber(formatPhoneNumber(e.target.value));
+  }
+
+  const formatPhoneNumber = (phoneNumber) => {
+    if (!phoneNumber) {
+      return phoneNumber;
+    }
+    phoneNumber = phoneNumber.replace(/[^\d]/g, '');
+
+    const pNumLen = phoneNumber.length
+    if (pNumLen <= 3) {
+      return phoneNumber;
+    }
+    else if (pNumLen <= 6) {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+    }
+    else {
+      return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 10)}`;
+    }
+  }
+
+  const handleCreditCard = (e) => {
+    const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g
+    const onlyNumbers = e.target.value.replace(/[^\d]/g, '')
+    const length = onlyNumbers.substring(0, 16);
+
+    setPaymentDetails(length.replace(regex, (regex, $1, $2, $3, $4) =>
+      [$1, $2, $3, $4].filter(group => !!group).join(' ')
+    ));
+  }
+
+  const disabledPaymentButton = () => {
+    if (emailValid && phoneNumber.length == 11 && paymentDetails.length == 19 && name.length) {
+      return (
+
+        <Button onClick={() => finalizePayment()} className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
+      )
+    }
+    else {
+      return (
+        <Button disabled={true} onClick={() => finalizePayment()} className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
+      )
+    }
+  }
+  /* Fake loading only for the looks*/
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const fetchQrCode = async () => {
+    await sleep(1500);
+    setQrCodeLoading(false);
   }
 
   return (
     <>
       <h4>Betalning</h4>
-      <Form>
+      <Form autoComplete='off'>
         <Form.Control className='mt-2 mb-2'
           type='text'
           name='name'
           value={name}
           placeholder='Namn'
           onChange={(event) => setName(event.target.value)}
+
         />
         <Form.Control className='mt-2 mb-2'
           type='text'
           name='email'
           value={email}
           placeholder='E-mail'
-          onChange={(event) => setEmail(event.target.value)}
+          style={!emailValid && email.length > 0 ? { 'borderColor': 'red', 'borderWidth': '3px' } : { 'borderColor': 'lightGrey' }}
+          onChange={(e) => handleEmail(e)}
+
         />
         <Form.Control className='mt-2 mb-2'
           type='text'
           name='phoneNumber'
           value={phoneNumber}
           placeholder='Telefonnummer'
-          onChange={(event) => setPhoneNumber(event.target.value)}
+          onChange={(e) => handlePhoneNumber(e)}
         />
         <Form.Control className='mt-2 mb-2'
           type='text'
           name='paymentDetails'
           value={paymentDetails}
           placeholder='Kreditkortsnummer'
-          onChange={(event) => setPaymentDetails(event.target.value)}
+          onChange={handleCreditCard}
+
         />
         <Row className='justify-content-center'>
-          <Button className='mt-4 w-75' variant='warning' onClick={() => finalizePayment()}>Genomför betalning</Button>
-        </Row>
+          {
+            disabledPaymentButton()
+          }
+        </Row >
       </Form>
       {
         <Modal
@@ -122,15 +198,15 @@ const Payment = ({ ticket }) => {
         >
           <Modal.Header className='text-center'><h2>Bokning bekräftad</h2></Modal.Header>
           <Modal.Body>
-            {
-              Object.keys(confirmedBookingData).map((k, i) => {
-                return (
-                  <div key={i}>{k}: {confirmedBookingData[k]}</div>
-                )
-              })
-            }
-            <Row className='p-5'>
-              <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" />
+            <h6 className='text-center'>Skanna din QR-kod för att visa biljetten</h6>
+            <Row className='p-5 '>
+              <Col className='text-center'>
+                {
+                  qrCodeLoading ?
+                    <Spinner size="xxl" animation='grow' variant='warning' role="status" /> :
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${confirmedBookingData.bookingId}&amp;size=100x100`} alt='' title=''></img>
+                }
+              </Col>
             </Row>
           </Modal.Body>
 

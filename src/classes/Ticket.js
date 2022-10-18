@@ -1,9 +1,12 @@
+import Price from './Price';
+
 class Ticket {
 
-    seats = [];
-    travelers = [];
-    firstClass = 0; //false;
-    cancellationProtection = 0; //false;
+    #seats = [];
+    #travelers = [];
+    #firstClass = 0;
+    #cancellationProtection = 0;
+    //#freeSeatsFraction;
 
     constructor(data) {
         Object.assign(this, data);
@@ -14,34 +17,52 @@ class Ticket {
             throw new Error('Internal booking system error.');
         }
         else {
-            this.seats.push(
+            this.#seats.push(
                 {
                     carriageId: carriageId,
                     seat_id: seatId,
-                    seatNumber: seatNumber
+                    seatNumber: seatNumber,
                 }
             );
         }
     }
 
+    getSeats() {
+        return this.#seats;
+    }
+
     addTraveler(travelerDataObject) {
-        this.travelers.push(travelerDataObject);
+        this.#travelers.push(travelerDataObject);
     }
 
     getTravelers() {
-        return this.travelers;
+        return this.#travelers;
     }
 
-    getSeats() {
-        return this.seats;
+    getFirstClass() {
+        return this.#firstClass;
     }
 
     setFirstClass(firstClass) {
-        this.firstClass = firstClass;
+        this.#firstClass = firstClass;
     }
 
-    calculatePrice() {
-        // call static methods of Price class to calculate prices 
+    getCancellationProtection() {
+        return this.#cancellationProtection;
+    }
+
+    setCancellationProtection(boolValue) {
+        if (boolValue === true) {
+            this.#cancellationProtection = 1;
+        }
+        else {
+            this.#cancellationProtection = 0;
+        }
+    }
+
+    getPrice(travelerCategories) {
+        this.price = Price.getPrice(this, travelerCategories);
+        return this.price;
     }
 
     formatDepartureDateTime() {
@@ -53,11 +74,11 @@ class Ticket {
         return {
             customerId: 2,
             journeyId: this.journeyId,
-            cancellationProtection: this.cancellationProtection,
+            cancellationProtection: this.#cancellationProtection,
             departureTime: this.formatDepartureDateTime(),
             startStationId: this.startStationId,
             endStationId: this.endStationId,
-            travelers: this.travelers
+            travelers: this.#travelers
         }
     }
 
@@ -84,7 +105,7 @@ class Ticket {
             },
             {
                 description: 'Antal resande: ',
-                value: this.seats.length
+                value: this.#seats.length
             }
         ];
         return ticketInfo;

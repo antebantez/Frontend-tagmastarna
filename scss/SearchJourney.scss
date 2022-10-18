@@ -14,21 +14,22 @@
 
 }
 
-#searchJourneyTest {
-  margin-top: 30vh;
+#searchJourneyForm {
+  margin-top: 25vh;
 }
 
 .seat {
-  background-color: rgb(87, 182, 19);
-  color: white;
+  background-color: rgb(73, 134, 29);
+  /* color: white;
   max-width: 25px;
   margin-top: 10px;
   border-radius: 3px;
-  padding: 4px;
+  padding: 4px; */
 
 }
 
 #selectRoutesForm {
+  color: white;
   background: rgb(199, 132, 7, .8);
 
 }
@@ -37,9 +38,14 @@
   color: white;
 }
 
+#selectRoutesForm:focus {
+  color: white;
+}
+
 #selectRoutesForm::selection {
   box-shadow: rgb(199, 132, 7, .8);
 }
+
 
 /* .seat {
   color: white;
@@ -51,10 +57,27 @@
 } */
 
 .seatSelected {
-  max-width: 25px;
-  margin-top: 10px;
-  border-radius: 3px;
-  padding: 4px;
-  color: white;
+  // /* max-width: 25px;
+  // margin-top: 10px;
+  // border-radius: 3px;
+  // padding: 4px;
+  // color: white; */
   background: rgb(69, 142, 226);
+}
+
+.occupiedSeat {
+  background: rgb(128, 11, 11);
+}
+
+.handicapSeat {
+  background-color: orange;
+}
+
+.seatInfoHandicap {
+  background-color: orange;
+  height: 20px;
+  width: 50px;
+  border-radius: 8px;
+  margin-left: 40px;
+  padding-bottom: 5px;
 }
