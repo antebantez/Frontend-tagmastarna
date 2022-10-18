@@ -129,7 +129,7 @@ const Payment = ({ ticket }) => {
   }
 
   const disabledPaymentButton = () => {
-    if (emailValid && phoneNumber.length == 11 && paymentDetails.length == 19) {
+    if (emailValid && phoneNumber.length == 11 && paymentDetails.length == 19 && name.length) {
       return (
 
         <Button onClick={() => finalizePayment()} className='mt-4 w-75' variant='warning'>Genomför betalning</Button>
@@ -145,7 +145,7 @@ const Payment = ({ ticket }) => {
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const fetchQrCode = async () => {
     await sleep(1500);
-    setQrCodeLoading(true);
+    setQrCodeLoading(false);
   }
 
   return (

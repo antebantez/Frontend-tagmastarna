@@ -12,13 +12,23 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
   const handleSelectSeats = (seat, eventTarget, carriageType) => {
     let x = selectedSeats.find(x => x.seatId == seat.seatId);
     if (selectedSeats.find(x => x.seatId == seat.seatId)) {
-      eventTarget.classList.toggle('seat');
+      if (seat.handicap) {
+        eventTarget.classList.toggle('handicapSeat');
+      }
+      else {
+        eventTarget.classList.toggle('seat');
+      }
       eventTarget.classList.toggle('seatSelected');
       setSelectedSeats(selectedSeats.filter(x => x.seatId !== seat.seatId));
       return;
     }
     if (selectedSeats.length < seatsToSelect) {
-      eventTarget.classList.toggle('seat');
+      if (seat.handicap) {
+        eventTarget.classList.toggle('handicapSeat');
+      }
+      else {
+        eventTarget.classList.toggle('seat');
+      }
       eventTarget.classList.toggle('seatSelected');
       setSelectedSeats([...selectedSeats, seat]);
       carriageType === 1 ? ticket.setFirstClass(1) : ticket.setFirstClass(0);
@@ -37,7 +47,7 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
           <Row className='text-center'>
             < Link to={'/booking'} state={{ ticket: ticket }} >
               <Button
-                className='w-50'
+                className='w-50 mb-4'
                 variant='warning'
                 onClick={() => selectSeatsCallback(selectedSeats)}
               >Bekräfta
@@ -47,7 +57,15 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
         }
       </div>
       <Container fluid className=''>
+        <Row className='text-center'>
+          <Col xs={1}>
+            <div className='text-center seatInfoHandicap'></div>
 
+          </Col>
+          <Col xs={11}>
+            <p>= Handikappsplats</p>
+          </Col>
+        </Row>
         <Row className=''>
           <div className=''>
             <Carousel controls={false} interval={null} touch={selectedSeats.length > 0 ? false : true}
@@ -76,7 +94,7 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
                                   return (
                                     <Col key={x}>
                                       <div
-                                        className={seat.seat_booked_bool ? 'px-3 py-2 fw-bold m-1 rounded occupiedSeat' : 'px-3 py-2 fw-bold m-1 rounded seat'}
+                                        className={seat.seat_booked_bool ? 'px-3 py-2 fw-bold m-1 rounded occupiedSeat' : seat.handicap ? 'px-3 py-2 fw-bold m-1 rounded handicapSeat' : 'px-3 py-2 fw-bold m-1 rounded seat'}
                                         id={seat.seatId}
                                         key={x}
                                         onClick={seat.seat_booked_bool ? () => { } : (event) => handleSelectSeats(seat, event.currentTarget, carriage.carriageType)}

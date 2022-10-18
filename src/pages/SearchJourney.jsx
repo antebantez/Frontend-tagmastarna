@@ -26,7 +26,7 @@ const SearchJourney = () => {
       <Row className="searchJourney">
 
       </Row>
-      <Row id="searchJourneyTest" className="mt-5">
+      <Row id="searchJourneyTest" className="">
         {
           journeys ? (<Journeys journeyData={journeys} />) :
             (<SearchJourneyForm handleSearch={handleSearch} />)

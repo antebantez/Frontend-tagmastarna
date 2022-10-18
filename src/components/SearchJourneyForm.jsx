@@ -25,10 +25,10 @@ const SearchJourneyForm = ({ handleSearch }) => {
   }, []);
 
   return (<>
-    <Row className="mb-5"></Row>
-    <Row className="searchJourneyForm mt-5">
+
+    <Row id="searchJourneyForm" className="searchJourneyForm">
       <div className="form-wrapper ">
-        <Form onSubmit={submitForm} autoComplete="on" className="mt-5">
+        <Form onSubmit={submitForm} autoComplete="on" className="">
           <Form.Group>
             <Form.Control
               list="list-stations"

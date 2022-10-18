@@ -15,6 +15,9 @@ class Price {
     }
     static cancellationProcetionMultiplier = 1.2;
 
+    static getAdultPrice(minutes) {
+        return minutes * 2;
+    }
 
     static getPrice(ticket, travelerCategories) {
         let totalPrice = 0;

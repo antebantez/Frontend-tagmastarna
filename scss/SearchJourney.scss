@@ -14,8 +14,8 @@
 
 }
 
-#searchJourneyTest {
-  margin-top: 30vh;
+#searchJourneyForm {
+  margin-top: 25vh;
 }
 
 .seat {
@@ -67,4 +67,17 @@
 
 .occupiedSeat {
   background: rgb(128, 11, 11);
+}
+
+.handicapSeat {
+  background-color: orange;
+}
+
+.seatInfoHandicap {
+  background-color: orange;
+  height: 20px;
+  width: 50px;
+  border-radius: 8px;
+  margin-left: 40px;
+  padding-bottom: 5px;
 }

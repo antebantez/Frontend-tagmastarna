@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Payment from '../components/Payment';
@@ -17,6 +17,10 @@ const Booking = () => {
   const [travelerCategoriesSelected, setTravelerCategoriesSelected] = useState(0);
   const [totalPrice, setTotalPrice] = useState('');
 
+  useEffect(() => {
+    setTotalPrice(ticket.getPrice(travelerCategories));
+  }, [travelerCategories]);
+
   const addTravelersDataToTicket = () => {
     let seatIds = [];
     for (let seat of ticket.getSeats()) {
@@ -32,7 +36,7 @@ const Booking = () => {
     setMakePayment(true);
   }
 
-  const travelerCategoryChange = (category, change) => {
+  const travelerCategoryChange = async (category, change) => {
     if (numOfTravelers === travelerCategoriesSelected && change > 0) {
       return;
     }
@@ -40,8 +44,9 @@ const Booking = () => {
       return;
     }
     else {
-      setTravelerCategories(previousState => ({ ...previousState, [category]: previousState[category] + change }));
+      setTravelerCategories(previousState => ({ ...previousState, [category]: previousState[category] + change }), setTotalPrice(ticket.getPrice(travelerCategories)));
       setTravelerCategoriesSelected(travelerCategoriesSelected + change);
+      setTotalPrice(ticket.getPrice(travelerCategories));
     }
   }
 
