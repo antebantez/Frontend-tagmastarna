@@ -55,7 +55,7 @@ const Journeys = ({ journeyData }) => {
                   <Card.Title>Till: {journey.endDestination}</Card.Title>
                   <Card.Subtitle>Vuxen pris från: {Price.getAdultPrice(journey.endStationArrival - journey.startStationDeparture)}:-</Card.Subtitle>
                   <Card.Subtitle>
-                    Avgångstid: {new Date(new Date(journey.depFromFirstStationTime).setMinutes(new Date(journey.depFromFirstStationTime).getMinutes() + journey.startStationDeparture)).toLocaleString()}
+                    Avgångstid: {new Date(new Date(journey.depFromFirstStationTime).setMinutes(new Date(journey.depFromFirstStationTime).getMinutes() + journey.startStationDeparture)).toLocaleString("sv-SE")}
                   </Card.Subtitle>
                   <Card.Subtitle>Beräknad restid: {journey.endStationArrival - journey.startStationDeparture} minuter</Card.Subtitle>
                   <Button className='m-3' variant='warning'

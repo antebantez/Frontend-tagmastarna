@@ -67,7 +67,7 @@ class Ticket {
 
     formatDepartureDateTime() {
         let dt = new Date(this.depFromFirstStationTime);
-        return new Date(dt.setMinutes(dt.getMinutes() + this.startStationDeparture)).toLocaleString();
+        return new Date(dt.setMinutes(dt.getMinutes() + this.startStationDeparture)).toLocaleString("sv-SE");
     }
 
     getBookingData() {
@@ -97,7 +97,7 @@ class Ticket {
             },
             {
                 description: 'Avgångstid: ',
-                value: `${dt.toLocaleString()}`
+                value: `${dt.toLocaleString("sv-SE")}`
             },
             {
                 description: 'Beräknad restid: ',

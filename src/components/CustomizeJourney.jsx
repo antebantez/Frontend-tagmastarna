@@ -41,7 +41,7 @@ const CustomizeJourney = ({ trainData, journeyData, ticket }) => {
         <Card.Subtitle>
           <div className='mb-1'>Från : {journeyData.startStation}</div>
           <div className='mb-1'>Till: {journeyData.endDestination}</div>
-          <div className='mb-1'>Avgångstid: {journeyDepartureTime.toLocaleString()}</div>
+          <div className='mb-1'>Avgångstid: {journeyDepartureTime.toLocaleString("sv-SE")}</div>
           <div className='mb-1'>Lediga platser: {trainData.numOfFreeSeats}</div>
           <Row className='mt-3'>
             <div className='mb-1'>Antal resande: {numOfTravelers}</div>
