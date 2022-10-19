@@ -6,8 +6,18 @@ import Train from '../components/Train';
 const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
   const [seatsToSelect] = useState(numOfSeats);
   const [carriageData, setCarriageData] = useState(null);
+  const [allSeats, setAllSeats] = useState([]);
+  const [formatedTrainData, setFormatedTrainData] = useState([]);
 
   const formatSeatData = () => {
+    let bookedSeats = [];
+    for (let seat of allSeats) {
+      if (!seatData.seats.find(x => x.seatId === seat.seatId)) {
+        seat.seat_booked_bool = 1;
+        bookedSeats.push(seat)
+      }
+    }
+    seatData.seats = [...seatData.seats, ...bookedSeats];
     let formatedTrainData = [];
 
     let carriageIds = [...new Set(seatData.seats.map(seat => seat.carriageId))];
@@ -34,10 +44,20 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
       formatedTrainData.push(x);
     }
 
+    console.log(formatedTrainData);
     return formatedTrainData;
   }
 
-  const [formatedTrainData] = useState(() => formatSeatData());
+  useEffect(() => {
+    const getAllSeats = async () => {
+      const allSeats = await fetch(`/api/selectSeats/${ticket.journeyId}`);
+      const allSeatsJson = await allSeats.json();
+      setAllSeats(allSeatsJson.data);
+      setFormatedTrainData(formatSeatData());
+    }
+
+    getAllSeats();
+  }, []);
 
   const handleSelectSeats = (seats) => {
     for (let seat of seats) {
@@ -66,7 +86,7 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
               {
                 formatedTrainData.length > 0 &&
                 <Train
-                  trainData={formatedTrainData}
+                  trainData={formatSeatData() /* formatedTrainData */}
                   selectSeatsCallback={handleSelectSeats}
                   number={seatsToSelect}
                   ticket={ticket}

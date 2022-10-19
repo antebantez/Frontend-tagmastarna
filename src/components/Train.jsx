@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carriage from './Carriage';
 import { Row, Col, Container } from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
@@ -34,7 +34,6 @@ const Train = ({ trainData, selectSeatsCallback, number, ticket }) => {
       carriageType === 1 ? ticket.setFirstClass(1) : ticket.setFirstClass(0);
     }
   }
-
 
   return (
     <>
