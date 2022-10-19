@@ -73,7 +73,7 @@ const Payment = ({ ticket }) => {
           let bookingDataObject = postRequestBody;
           delete bookingDataObject['travelers'];
           setConfirmedBookingData(bookingDataObject);
-          sendConfirmationEmail(bookingDataObject);
+          //sendConfirmationEmail(bookingDataObject);
         }
         )
         .catch(err => {

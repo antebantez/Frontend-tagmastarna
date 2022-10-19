@@ -32,11 +32,19 @@ const LoginPage = () => {
   };
 
   return (
+    <Card className="mt-5">
+      <Row className="text-center">
+        <Col className="mt-5">
+        <h1 style={{fontWeight: "bolder"}}>Logga in!</h1>
+        </Col>
+      </Row>
     <form className="loginForm" onSubmit={handleSubmit}>
       <section>
         <input
           style={{
-            marginTop: "4vh",
+              marginTop: "4vh",
+            borderRadius: "5px",
+              padding: "5px"
           }}
           placeholder="Namn"
           type="text"
@@ -46,7 +54,10 @@ const LoginPage = () => {
         />
 
         <input
-          style={{marginTop: "4vh"}}
+            style={{
+              marginTop: "4vh",
+            borderRadius: "5px",
+              padding: "5px"}}
           placeholder="Lösenord"
           type="password"
           variant="outlined"
@@ -57,7 +68,7 @@ const LoginPage = () => {
 
       <button
         id="loginButton"
-        className="border-0 mt-5"
+        className="border-0 mt-5 bg-warning"
         type="submit"
         variant="contained"
         onClick={() => navigate("/login")}
@@ -70,17 +81,18 @@ const LoginPage = () => {
         {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
       </div>
 
-      <div id="loginDiv"> Inget konto?</div>
+      <div id="loginDiv" className="fw-bold"> Inget konto?</div>
       <button
         id="loginButton"
-        className="border-0 mt-4"
+        className="border-0 mt-4 bg-warning"
         type="submit"
         variant="contained"
         onClick={() => navigate("/register")}
       >
         Registrera dig
       </button>
-    </form>
+      </form>
+      </Card>
   );
 };
 

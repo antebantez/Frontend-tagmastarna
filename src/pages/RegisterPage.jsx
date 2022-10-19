@@ -1,7 +1,9 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerUser} from "../mongoDb/features/authSlice";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
+import Card from 'react-bootstrap/Card'
+import {Col, Row} from "react-bootstrap";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -31,18 +33,28 @@ const RegisterPage = () => {
   };
 
   return (
+    <Card>
+      <Row className="text-center">
+        <Col className="mt-3">
+        <h1 style={{fontWeight: "bolder"}}>Registrering</h1>
+        </Col>
+      </Row>
     <form className="loginForm" onSubmit={handleSubmit}>
       <section>
         <input
-          placeholder="Namn"
+            placeholder="Namn"
+            style={{borderRadius: "5px",
+              padding: "5px"}}
           type="text"
-          inputProps={{style: {fontFamily: "Arial", backgroundColor: "white"}}}
+          inputProps={{style: {fontFamily: "Arial", backgroundColor: "white",}}}
           onChange={(e) => setUser({...user, name: e.target.value})}
         />
 
         <input
           style={{
-            marginTop: "4%",
+              marginTop: "4%",
+            borderRadius: "5px",
+              padding: "5px"
           }}
           placeholder="Mail"
           type="text"
@@ -52,7 +64,9 @@ const RegisterPage = () => {
 
         <input
           style={{
-            marginTop: "4%",
+              marginTop: "4%",
+            borderRadius: "5px",
+              padding: "5px"
           }}
           placeholder="Lösenord"
           type="password"
@@ -62,7 +76,9 @@ const RegisterPage = () => {
 
         <input
           style={{
-            marginTop: "4%",
+              marginTop: "4%",
+              borderRadius: "5px",
+              padding: "5px"
           }}
           placeholder="Bekräfta lösenord"
           type="password"
@@ -73,7 +89,7 @@ const RegisterPage = () => {
 
       <button
         id="registerButton"
-        className="border-0 mt-5"
+        className="border-0 mt-5 bg-warning"
         type="submit"
         variant="contained"
       >
@@ -92,14 +108,15 @@ const RegisterPage = () => {
       <div id="loginH2"> Har du redan ett konto?</div>
       <button
         id="loginButton"
-        className="border-0 mt-4"
+        className="border-0 mt-4 bg-warning"
         type="submit"
         variant="contained"
         onClick={() => navigate("/login")}
       >
         Logga in
       </button>
-    </form>
+      </form>
+      </Card>
   );
 };
 
