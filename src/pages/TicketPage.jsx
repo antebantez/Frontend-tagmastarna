@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 const TicketPage = () => {
-  return (
-    <div>TicketPage</div>
-  )
-}
+  const auth = useSelector((state) => state.auth);
 
-export default TicketPage
+  console.log(auth);
+
+  return (
+    <div className="loginForm">
+      <div id="loginH2">{auth.name}</div>
+    </div>
+  );
+};
+
+export default TicketPage;

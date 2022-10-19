@@ -1,0 +1,71 @@
+#loginButton {
+  border-radius: 25px;
+  max-width: 200px;
+  width: 90%;
+  height: 5vh;
+  color: white;
+  font-size: larger;
+  font-weight: bolder;
+  background: rgb(199, 132, 7, 0.7);
+}
+
+#loginButton {
+  border-radius: 25px;
+  max-width: 200px;
+  width: 90%;
+  height: 5vh;
+  color: white;
+  font-size: larger;
+  font-weight: bolder;
+  background: rgb(199, 132, 7, 0.7);
+}
+#registerButton {
+  border-radius: 25px;
+  max-width: 200px;
+  width: 90%;
+  height: 5vh;
+  color: white;
+  font-size: larger;
+  font-weight: bolder;
+  background: rgb(199, 132, 7, 0.7);
+}
+#loginH2 {
+  font-size: 40px;
+  color: #745c26;
+  margin-top: 2rem;
+}
+
+#loginP {
+  font-size: 15px;
+  color: hsl(42, 83%, 77%);
+  margin-top: 2em;
+}
+
+#loginDiv {
+  font-size: 15px;
+  color: hsl(61, 100%, 62%);
+  margin-top: 2em;
+}
+#loginLink {
+  font-size: 15px;
+  color: hsl(61, 100%, 49%);
+  margin-top: 2em;
+}
+
+.loginForm {
+  text-align: center;
+  align-items: center;
+  max-width: 25rem;
+  width: 100%;
+  margin: 2rem auto;
+}
+#loginH2 {
+  font-size: 22px;
+  color: hsl(71, 100%, 50%);
+}
+
+#registerError {
+  font-size: 15px;
+  color: hsl(0, 100%, 90%);
+  margin-top: 2em;
+}

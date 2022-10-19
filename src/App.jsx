@@ -1,15 +1,15 @@
-import React from "react"
-import HomePage from './pages/HomePage';
-import SearchJourney from './pages/SearchJourney'
-import SelectSeats from './pages/SelectSeats'
-import TicketPage from './pages/TicketPage'
+import React from "react";
+import HomePage from "./pages/HomePage";
+import SearchJourney from "./pages/SearchJourney";
+import SelectSeats from "./pages/SelectSeats";
+import TicketPage from "./pages/TicketPage";
 import Booking from "./pages/Booking";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import '../scss/App.scss';
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import "../scss/App.scss";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
-
 
 function App() {
   return (
@@ -25,10 +25,13 @@ function App() {
           <Route path="/selectSeats" element={<SelectSeats />} />
           <Route path="/ticketPage" element={<TicketPage />} />
           <Route path="/booking" element={<Booking />} />
+
+          {/* Register, Login*/}
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         <Footer />
       </main>
-
     </BrowserRouter>
   );
 }

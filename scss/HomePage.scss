@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 #root {
   background-image: url("/Assets/Jada.jpeg");
   background-attachment: fixed;
   min-height: 100vh;
-max-height: max-content;  background-size: cover;
+  max-height: max-content;
+  background-size: cover;
   background-position: center;
-font-family: 'Roboto Mono', monospace;
-  
+  font-family: "Roboto Mono", monospace;
 }
 
 #testKnapp {
