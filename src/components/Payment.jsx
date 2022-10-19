@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -16,6 +16,8 @@ const Payment = ({ ticket }) => {
   const [confirmedBookingData, setConfirmedBookingData] = useState({});
   const [qrCode, setQrCode] = useState(null);
   const [qrCodeLoading, setQrCodeLoading] = useState(true);
+
+
 
   const finalizePayment = async () => {
     let customerId;
@@ -71,12 +73,13 @@ const Payment = ({ ticket }) => {
           let bookingDataObject = postRequestBody;
           delete bookingDataObject['travelers'];
           setConfirmedBookingData(bookingDataObject);
+          sendConfirmationEmail(bookingDataObject);
         }
-      )
-      .catch(err => {
-        console.log(err);
-      });
-    fetchQrCode();
+        )
+        .catch(err => {
+          console.log(err);
+        });
+      fetchQrCode();
   }
 
   const handleEmail = (e) => {
@@ -146,6 +149,27 @@ const Payment = ({ ticket }) => {
   const fetchQrCode = async () => {
     await sleep(1500);
     setQrCodeLoading(false);
+  }
+
+  const sendConfirmationEmail = async (bookingDataObject) => {
+    let postRequestBody = {
+      email: email,
+      bookingInfo: {
+        date: bookingDataObject.departureTime,
+        id: bookingDataObject.bookingId
+      }
+    }
+    await fetch(
+      `/api/booking/confirmationEmail`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postRequestBody)
+      }
+    )
   }
 
   return (
