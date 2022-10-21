@@ -5,9 +5,8 @@ import Train from '../components/Train';
 
 const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
   const [seatsToSelect] = useState(numOfSeats);
-  const [carriageData, setCarriageData] = useState(null);
   const [allSeats, setAllSeats] = useState([]);
-  const [formatedTrainData, setFormatedTrainData] = useState([]);
+  const [formattedTrainData, setFormattedTrainData] = useState([]);
 
   const formatSeatData = () => {
     let bookedSeats = [];
@@ -18,7 +17,7 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
       }
     }
     seatData.seats = [...seatData.seats, ...bookedSeats];
-    let formatedTrainData = [];
+    let formattedTrainData = [];
 
     let carriageIds = [...new Set(seatData.seats.map(seat => seat.carriageId))];
     carriageIds = carriageIds.filter(id => id !== null);
@@ -41,11 +40,10 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
         ).find(x => x.carriageType != null).carriageType,
         carriageId: carriageId
       }
-      formatedTrainData.push(x);
+      formattedTrainData.push(x);
     }
 
-    console.log(formatedTrainData);
-    return formatedTrainData;
+    return formattedTrainData;
   }
 
   useEffect(() => {
@@ -53,7 +51,7 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
       const allSeats = await fetch(`/api/selectSeats/${ticket.journeyId}`);
       const allSeatsJson = await allSeats.json();
       setAllSeats(allSeatsJson.data);
-      setFormatedTrainData(formatSeatData());
+      setFormattedTrainData(formatSeatData());
     }
 
     getAllSeats();
@@ -67,14 +65,6 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
     }
   }
 
-  useEffect(() => {
-    const x = async () => {
-      let carriageJson = await (await fetch('../../public/Assets/carriages.json')).json();
-      setCarriageData(carriageJson);
-    }
-    x();
-  }, []);
-
   return (
     <>
 
@@ -84,9 +74,9 @@ const SelectSeats = ({ seatData, numOfSeats, ticket }) => {
 
             <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth'>
               {
-                formatedTrainData.length > 0 &&
+                formattedTrainData.length > 0 &&
                 <Train
-                  trainData={formatSeatData() /* formatedTrainData */}
+                  trainData={formatSeatData()}
                   selectSeatsCallback={handleSelectSeats}
                   number={seatsToSelect}
                   ticket={ticket}

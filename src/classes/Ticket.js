@@ -72,7 +72,6 @@ class Ticket {
 
     getBookingData() {
         return {
-            customerId: 2,
             journeyId: this.journeyId,
             cancellationProtection: this.#cancellationProtection,
             departureTime: this.formatDepartureDateTime(),

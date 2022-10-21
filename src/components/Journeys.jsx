@@ -6,6 +6,7 @@ import CustomizeJourney from './CustomizeJourney';
 import Ticket from '../classes/Ticket';
 import Card from 'react-bootstrap/Card'
 import Price from '../classes/Price'
+
 const Journeys = ({ journeyData }) => {
   const [trainData, setTrainData] = useState(null);
   const [selectedJourney, setSelectedJourney] = useState(null);

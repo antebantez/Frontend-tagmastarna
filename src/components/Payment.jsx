@@ -14,10 +14,7 @@ const Payment = ({ ticket }) => {
   const [paymentDetails, setPaymentDetails] = useState('');
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const [confirmedBookingData, setConfirmedBookingData] = useState({});
-  const [qrCode, setQrCode] = useState(null);
   const [qrCodeLoading, setQrCodeLoading] = useState(true);
-
-
 
   const finalizePayment = async () => {
     let customerId;
@@ -75,11 +72,11 @@ const Payment = ({ ticket }) => {
           setConfirmedBookingData(bookingDataObject);
           //sendConfirmationEmail(bookingDataObject);
         }
-        )
-        .catch(err => {
-          console.log(err);
-        });
-      fetchQrCode();
+      )
+      .catch(err => {
+        console.log(err);
+      });
+    fetchQrCode();
   }
 
   const handleEmail = (e) => {
@@ -145,8 +142,8 @@ const Payment = ({ ticket }) => {
     }
   }
   /* Fake loading only for the looks*/
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
   const fetchQrCode = async () => {
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
     await sleep(1500);
     setQrCodeLoading(false);
   }

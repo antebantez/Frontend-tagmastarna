@@ -13,7 +13,7 @@ class Price {
         youth: 0.85,
         child: 0.5
     }
-    static cancellationProcetionMultiplier = 1.2;
+    static cancellationProtectionMultiplier = 1.2;
 
     static getAdultPrice(minutes) {
         return minutes * 2;
@@ -30,7 +30,7 @@ class Price {
             totalPrice += (baseTicketPrice * this.categoryMultipliers[k]) * travelerCategories[k];
         });
         if (ticket.getCancellationProtection()) {
-            totalPrice *= this.cancellationProcetionMultiplier;
+            totalPrice *= this.cancellationProtectionMultiplier;
         }
 
         return Math.round(totalPrice);

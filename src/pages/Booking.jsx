@@ -15,7 +15,7 @@ const Booking = () => {
   const [makePayment, setMakePayment] = useState(false);
   const [numOfTravelers, setNumOfTravelers] = useState(ticket.getSeats().length);
   const [travelerCategoriesSelected, setTravelerCategoriesSelected] = useState(0);
-  const [totalPrice, setTotalPrice] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     setTotalPrice(ticket.getPrice(travelerCategories));
