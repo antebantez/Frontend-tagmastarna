@@ -1,14 +1,23 @@
 import React, {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import Payment from "../components/Payment";
+import Payment from "../Payment";
 import Card from "react-bootstrap/Card";
 import {Col, Row} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-
-const Booking = () => {
+import {useSelector} from "react-redux";
+import Ticket from "../../classes/Ticket";
+import Price from "../../classes/Price";
+const bookingReturn = () => {
   const location = useLocation();
+  const rounds = useSelector((state) => state.rounds);
+
+  const [ticketReturn] = useState(location.state.ticketReturn);
+
   const [ticket] = useState(location.state.ticket);
+
+  /* ----------------------------------- -----------------------------------*/
+  /* ----------------------------------- -----------------------------------*/
   const [travelerCategories, setTravelerCategories] = useState({
     adult: 0,
     child: 0,
@@ -16,13 +25,15 @@ const Booking = () => {
     youth: 0,
     student: 0,
   });
+
   const [makePayment, setMakePayment] = useState(false);
+
   const [numOfTravelers, setNumOfTravelers] = useState(
     ticket.getSeats().length
   );
   const [travelerCategoriesSelected, setTravelerCategoriesSelected] =
     useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState("");
 
   useEffect(() => {
     setTotalPrice(ticket.getPrice(travelerCategories));
@@ -44,6 +55,7 @@ const Booking = () => {
     });
     setMakePayment(true);
   };
+  console.log(ticket.getPrice(travelerCategories));
 
   const travelerCategoryChange = async (category, change) => {
     if (numOfTravelers === travelerCategoriesSelected && change > 0) {
@@ -67,10 +79,10 @@ const Booking = () => {
     ticket.setCancellationProtection(e);
     setTotalPrice(ticket.getPrice(travelerCategories));
   };
-
+  new Ticket().getPrice(travelerCategories);
   return (
     <>
-      <Card className="p-2 mt-5">
+      <Card style={{marginBottom: "50vh"}}>
         <h2 style={{textAlign: "center"}}>Slutför bokning</h2>
         {!makePayment ? (
           <div>
@@ -82,6 +94,16 @@ const Booking = () => {
                 </div>
               );
             })}
+            <p> ------------------------------------</p>
+            {ticketReturn.getTicketRenderInfoReturn().map((infoField, id) => {
+              return (
+                <div key={id}>
+                  {infoField.description}
+                  {infoField.value}
+                </div>
+              );
+            })}
+
             <div>
               <h5 style={{marginTop: "20px", textAlign: "center"}}>
                 Resenärer
@@ -243,4 +265,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default bookingReturn;

@@ -1,6 +1,6 @@
-import Price from "./Price";
+import PriceReturn from "./PriceReturn";
 
-class Ticket {
+class TicketReturn {
   #seats = [];
   #travelers = [];
   #firstClass = 0;
@@ -11,7 +11,7 @@ class Ticket {
     Object.assign(this, data);
   }
 
-  addSeatReservation(journeyId, carriageId, seatId, seatNumber) {
+  addSeatReservationReturn(journeyId, carriageId, seatId, seatNumber) {
     if (!this.journeyId === journeyId) {
       throw new Error("Internal booking system error.");
     } else {
@@ -23,11 +23,10 @@ class Ticket {
     }
   }
 
-  getSeats() {
+  getSeatsReturn() {
     return this.#seats;
   }
-
-  addTraveler(travelerDataObject) {
+  addTravelerReturn(travelerDataObject) {
     this.#travelers.push(travelerDataObject);
   }
 
@@ -47,7 +46,7 @@ class Ticket {
     return this.#cancellationProtection;
   }
 
-  setCancellationProtection(boolValue) {
+  setCancellationProtectionReturn(boolValue) {
     if (boolValue === true) {
       this.#cancellationProtection = 1;
     } else {
@@ -55,8 +54,9 @@ class Ticket {
     }
   }
 
-  getPrice(travelerCategories) {
-    this.price = Price.getPrice(this, travelerCategories);
+  getPriceReturn(travelerCategoriesReturn) {
+    this.price = PriceReturn.getPriceReturn(this, travelerCategoriesReturn);
+
     return this.price;
   }
 
@@ -74,16 +74,14 @@ class Ticket {
       journeyId: this.journeyId,
       cancellationProtection: this.#cancellationProtection,
       departureTime: this.formatDepartureDateTime(),
+
       startStationId: this.startStationId,
       endStationId: this.endStationId,
       travelers: this.#travelers,
     };
   }
 
-  getTicketRenderInfo() {
-    let dt = new Date(this.depFromFirstStationTime);
-    dt.setMinutes(dt.getMinutes() + this.startStationDeparture);
-
+  getTicketRenderInfoReturn() {
     let ticketInfo = [
       {
         description: "Från: ",
@@ -95,19 +93,18 @@ class Ticket {
       },
       {
         description: "Avgångstid: ",
-        value: `${dt.toLocaleString("sv-SE")}`,
+        value: `${new Date(
+          new Date(this.depFromFirstStationTime)
+        ).toLocaleString("sv-SE")}`,
       },
+
       {
         description: "Beräknad restid: ",
         value: `${this.endStationArrival - this.startStationDeparture} minuter`,
-      },
-      {
-        description: "Antal resande: ",
-        value: this.#seats.length,
       },
     ];
     return ticketInfo;
   }
 }
 
-export default Ticket;
+export default TicketReturn;

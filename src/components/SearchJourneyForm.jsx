@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Row } from "react-bootstrap";
+import {Row} from "react-bootstrap";
 
-const SearchJourneyForm = ({ handleSearch }) => {
+const SearchJourneyForm = ({handleSearch, active}) => {
   const [startStation, setStartStationInput] = useState("");
   const [endStation, setEndStationInput] = useState("");
   const [date, setDateInput] = useState("");
+  const [dateFrom, setDateInputFrom] = useState("");
   const [stations, setStations] = useState([]);
 
   const submitForm = (event) => {
     event.preventDefault();
-    handleSearch({ startStation, endStation, date });
+    handleSearch({startStation, endStation, date, dateFrom});
   };
-
   useEffect(() => {
     const getStations = async () => {
       const response = await fetch("/api/searchJourney/stations");
@@ -24,8 +24,7 @@ const SearchJourneyForm = ({ handleSearch }) => {
     getStations();
   }, []);
 
-  return (<>
-
+  return (
     <Row id="searchJourneyForm" className="searchJourneyForm">
       <div className="form-wrapper ">
         <Form onSubmit={submitForm} autoComplete="on" className="">
@@ -40,10 +39,11 @@ const SearchJourneyForm = ({ handleSearch }) => {
               onChange={(event) => setStartStationInput(event.target.value)}
               className="m-3 p-2 fs-3 border-0"
             />
-            <datalist id='list-stations'>
-              {
-                stations && stations.map((station) => <option key={station}>{station}</option>)
-              }
+            <datalist id="list-stations">
+              {stations &&
+                stations.map((station) => (
+                  <option key={station}>{station}</option>
+                ))}
             </datalist>
 
             <Form.Control
@@ -56,10 +56,11 @@ const SearchJourneyForm = ({ handleSearch }) => {
               onChange={(event) => setEndStationInput(event.target.value)}
               className="m-3 p-2 fs-3 border-0"
             />
-            <datalist id='list-destination-stations'>
-              {
-                stations && stations.map((station) => <option key={station}>{station}</option>)
-              }
+            <datalist id="list-destination-stations">
+              {stations &&
+                stations.map((station) => (
+                  <option key={station}>{station}</option>
+                ))}
             </datalist>
 
             <Form.Control
@@ -71,15 +72,40 @@ const SearchJourneyForm = ({ handleSearch }) => {
               onChange={(event) => setDateInput(event.target.value)}
               className="m-3 p-2 fs-3 border-0 text-white"
             />
+            {active === "TurRetur" ? (
+              <>
+                <Form.Control
+                  id="selectRoutesFormReturn"
+                  type="date"
+                  min={new Date().toISOString().slice(0, 10)}
+                  name="date"
+                  value={dateFrom}
+                  onChange={(event) => setDateInputFrom(event.target.value)}
+                  className="m-3 p-2 fs-3 border-0 text-white"
+                />
+                <Button
+                  variant="warning"
+                  className="m-3 px-5 py-2"
+                  type="submit"
+                  onClick={submitForm}
+                >
+                  Sök
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="warning"
+                className="m-3 px-5 py-2"
+                type="submit"
+                onClick={submitForm}
+              >
+                Sök
+              </Button>
+            )}
           </Form.Group>
-
-          <Button variant="warning" className="m-3 px-5 py-2" type="submit" onClick={submitForm}>
-            Sök
-          </Button>
         </Form>
       </div>
     </Row>
-  </>
   );
 };
 
